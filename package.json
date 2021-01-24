@@ -13,7 +13,7 @@
   "scripts": {
     "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
     "autofix": "npm run check -- --fix",
-    "changelog": "changelogx -f markdown -o ./changelog.md",
+    "changelog": "changelogx -c changelogx.config.js -f markdown -o ./changelog.md",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
     "install-hooks": "changelogx install-hook",
     "pre-v": "npm run check",
