@@ -1,0 +1,57 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  settings: {
+    'import/ignore': [/node_modules/, /\.(scss|less|css)$/],
+  },
+  plugins: ['@typescript-eslint', 'import', 'prettier'],
+  extends: ['eslint:recommended', 'airbnb', 'prettier'],
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        printWidth: 160,
+        singleQuote: true,
+        trailingComma: 'all',
+        bracketSpacing: true,
+        useTabs: false,
+        semi: true,
+        jsxBracketSameLine: true,
+        arrowParens: 'avoid',
+      },
+    ],
+    '@typescript-eslint/no-unused-expressions': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-useless-constructor': 'error',
+    'import/extensions': 'off',
+    'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-unresolved': 'off',
+    'no-shadow': 'off',
+    'no-undef': 'off',
+    'no-use-before-define': 'off',
+    'no-unused-expressions': 'off',
+    'no-unused-vars': 'off',
+    'no-useless-constructor': 'off',
+    'react/jsx-filename-extension': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'no-underscore-dangle': 'off',
+    'no-console': [
+      'error',
+      {
+        allow: ['warn', 'error'],
+      },
+    ],
+    'no-plusplus': 'off',
+  },
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  parserOptions: {
+    ecmaVersion: 7,
+    sourceType: 'module',
+    impliedStrict: true,
+  },
+};
