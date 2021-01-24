@@ -1,6 +1,6 @@
 {
   "name": "mobx-requestor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "lib/mobx-requestor.js",
   "author": {
