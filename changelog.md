@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v1.1.0
+- **Bug Fixes**
+  - add repo and and method clearErrorAndResponse - [635a412]( https://github.com/royriojas/mobx-requestor/commit/635a412 ), [royriojas](https://github.com/royriojas), 11/09/2021 02:12:26
+
+    
 ## v1.0.2
 - **Bug Fixes**
   - Fix changelog - [0d3e359]( https://github.com/royriojas/mobx-requestor/commit/0d3e359 ), [royriojas](https://github.com/royriojas), 24/01/2021 03:17:24
