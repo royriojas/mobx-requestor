@@ -109,6 +109,11 @@ export class MobxRequestor<T> {
     this._setResult(undefined, 'initial', null);
   };
 
+  clearErrorAndResponse = () => {
+    this.clearError();
+    this.clearResponse();
+  };
+
   async setResult(args: any) {
     const { fetchId } = args;
     // ignore request that is not current
@@ -265,6 +270,7 @@ export class MobxRequestor<T> {
       initialOrLoading: computed,
       setResponse: action,
       clearResponse: action,
+      clearErrorAndResponse: action,
       setResult: action,
       _setResult: action,
       response: computed,
