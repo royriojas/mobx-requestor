@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v2.0.0
+- **Bug Fixes**
+  - move mobx to peer dependencies - [9e34395]( https://github.com/royriojas/mobx-requestor/commit/9e34395 ), [royriojas](https://github.com/royriojas), 13/09/2021 03:14:19
+
+    
 ## v1.1.0
 - **Bug Fixes**
   - add repo and and method clearErrorAndResponse - [635a412]( https://github.com/royriojas/mobx-requestor/commit/635a412 ), [royriojas](https://github.com/royriojas), 11/09/2021 02:12:26
