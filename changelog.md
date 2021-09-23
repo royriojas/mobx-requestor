@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v3.0.0
+- **Features**
+  - add the abiltity to keep the original error as long as the text version of the error - [41fb227]( https://github.com/royriojas/mobx-requestor/commit/41fb227 ), [royriojas](https://github.com/royriojas), 23/09/2021 14:05:30
+
+    
 ## v2.0.0
 - **Bug Fixes**
   - move mobx to peer dependencies - [9e34395]( https://github.com/royriojas/mobx-requestor/commit/9e34395 ), [royriojas](https://github.com/royriojas), 13/09/2021 03:14:19
