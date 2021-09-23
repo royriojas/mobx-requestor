@@ -1,10 +1,18 @@
-import { observable, computed, action, makeObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 
+export interface OnResponseCallback {
+  (args: OnResponseCallbackArgs): Promise<void>;
+}
+
+export interface TransformErrorFn {
+  (error: any): any; // TODO: add better typings for this
+}
 export interface MobxRequestorArgs<T> {
   call(...args: any[]): Promise<T>;
-  onResponse?(): Promise<void>;
+  onResponse?: OnResponseCallback;
   autoClear?: boolean;
   defaultResponse?: any;
+  transformError?: TransformErrorFn;
 }
 
 export interface CallbackFn {
@@ -26,14 +34,12 @@ export interface OnResponseCallbackArgs {
   error: any;
 }
 
-export interface OnResponseCallback {
-  (args: OnResponseCallbackArgs): Promise<void>;
-}
-
 export class MobxRequestor<T> {
   fetchId: string = '';
 
   requestPromise?: Promise<T>;
+
+  transformError?: TransformErrorFn;
 
   onResponse?: OnResponseCallback;
 
@@ -49,7 +55,7 @@ export class MobxRequestor<T> {
 
   defaultResponse?: any;
 
-  error: any;
+  _rawError: any;
 
   requestCount = 0;
 
@@ -144,9 +150,24 @@ export class MobxRequestor<T> {
     this.requestPromise = undefined;
 
     if (error) {
-      this.error = error;
+      this._rawError = error;
     }
   };
+
+  get error() {
+    const receivedError = this._rawError || {};
+    const { sender } = receivedError;
+
+    const error = this.transformError
+      ? this.transformError(receivedError) ?? 'UKNONW_ERROR'
+      : sender?.response?.token || sender?.statusText || receivedError?.type || receivedError?.message;
+
+    return error;
+  }
+
+  get rawError() {
+    return this._rawError;
+  }
 
   get response() {
     return this.storedResponse || this.defaultResponse;
@@ -170,7 +191,7 @@ export class MobxRequestor<T> {
   }
 
   clearError() {
-    this.error = null;
+    this._rawError = null;
   }
 
   async _handleError(responseError: any, fetchId: string, params: any) {
@@ -183,14 +204,12 @@ export class MobxRequestor<T> {
 
     console.error('error requesting data for', this.fetchId, params, responseError);
 
-    const error = sender?.response?.token || sender?.statusText || responseError?.message || responseError || 'UNKNOWN_ERROR';
-
     await this.setResult({
       response: null,
       state: 'error',
       fetchId,
       params,
-      error,
+      error: responseError,
     });
   }
 
@@ -203,7 +222,7 @@ export class MobxRequestor<T> {
 
     try {
       this.state = 'fetching';
-      this.error = null;
+      this._rawError = null;
 
       if (this.autoClear) {
         this.storedResponse = {} as T;
@@ -234,10 +253,6 @@ export class MobxRequestor<T> {
 
       this.lastSentPayload = args;
 
-      p?.catch?.(error => {
-        this._handleError(error, fetchId, args);
-      });
-
       const response = await p;
 
       await this.setResult({
@@ -252,40 +267,15 @@ export class MobxRequestor<T> {
   }
 
   constructor(opts: MobxRequestorArgs<T>) {
-    makeObservable(this, {
-      state: observable,
-      storedResponse: observable.shallow,
-      error: observable,
-      downloadProgress: observable,
-      uploadProgress: observable,
-      resetUploadProgress: action,
-      resetDownloadProgress: action,
-      resetProgressReport: action,
-      uploadComplete: computed,
-      downloadComplete: computed,
-      reportUploadProgress: action,
-      reportDownloadProgress: action,
-      loading: computed,
-      success: computed,
-      initialOrLoading: computed,
-      setResponse: action,
-      clearResponse: action,
-      clearErrorAndResponse: action,
-      setResult: action,
-      _setResult: action,
-      response: computed,
-      lastPayloadSent: computed,
-      clearError: action,
-      _handleError: action,
-      execCall: action,
-    });
+    makeAutoObservable(this);
 
-    const { call, onResponse, autoClear, defaultResponse } = opts;
+    const { call, onResponse, autoClear, defaultResponse, transformError } = opts;
     if (!call) {
       throw new Error('"call" parameter should be defined');
     }
 
     this.call = call;
+    this.transformError = transformError;
     this.onResponse = onResponse;
     this.autoClear = autoClear;
     this.defaultResponse = defaultResponse;
