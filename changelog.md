@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v3.0.1
+- **Bug Fixes**
+  - issue preventing setting the error on the requestor instance - [b6ace9b]( https://github.com/royriojas/mobx-requestor/commit/b6ace9b ), [royriojas](https://github.com/royriojas), 24/09/2021 15:45:47
+
+    
 ## v3.0.0
 - **Features**
   - add the abiltity to keep the original error as long as the text version of the error - [41fb227]( https://github.com/royriojas/mobx-requestor/commit/41fb227 ), [royriojas](https://github.com/royriojas), 23/09/2021 14:05:30
