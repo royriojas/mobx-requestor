@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 export interface OnResponseCallback {
   (args: OnResponseCallbackArgs): Promise<void>;
@@ -267,7 +267,35 @@ export class MobxRequestor<T> {
   }
 
   constructor(opts: MobxRequestorArgs<T>) {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      state: observable,
+      storedResponse: observable.shallow,
+      _rawError: observable.shallow,
+      rawError: computed,
+      error: computed,
+      downloadProgress: observable,
+      uploadProgress: observable,
+      resetUploadProgress: action,
+      resetDownloadProgress: action,
+      resetProgressReport: action,
+      uploadComplete: computed,
+      downloadComplete: computed,
+      reportUploadProgress: action,
+      reportDownloadProgress: action,
+      loading: computed,
+      success: computed,
+      initialOrLoading: computed,
+      setResponse: action,
+      clearResponse: action,
+      clearErrorAndResponse: action,
+      setResult: action,
+      _setResult: action,
+      response: computed,
+      lastPayloadSent: computed,
+      clearError: action,
+      _handleError: action,
+      execCall: action,
+    });
 
     const { call, onResponse, autoClear, defaultResponse, transformError } = opts;
     if (!call) {
