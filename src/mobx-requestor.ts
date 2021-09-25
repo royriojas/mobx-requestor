@@ -1,76 +1,62 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
-export interface OnResponseCallback {
-  (args: OnResponseCallbackArgs): Promise<void>;
-}
-
-export interface TransformErrorFn {
-  (error: any): any; // TODO: add better typings for this
-}
-export interface MobxRequestorArgs<T> {
-  call(...args: any[]): Promise<T>;
-  onResponse?: OnResponseCallback;
-  autoClear?: boolean;
-  defaultResponse?: any;
-  transformError?: TransformErrorFn;
-}
-
-export interface CallbackFn {
-  (): void;
-}
-
 export type MobxRequestorState = 'initial' | 'fetching' | 'success' | 'error';
+export interface PromisedFn<T> {
+  (...args: any[]): Promise<T>;
+}
+export interface TransformErrorFn<K> {
+  (error: K): string;
+}
+export interface MobxRequestorArgs<T, F extends PromisedFn<T>, K extends Error> {
+  call: F;
+  autoClear?: boolean;
+  defaultResponse?: Partial<T>;
+  transformError?: TransformErrorFn<K>;
+}
 
 export interface UploadDownloadProgressArgs {
   percentage: number;
 }
 
-export interface OnResponseCallbackArgs {
-  prevResponse: any;
-  response: any;
+export interface SetResultParams<T, K extends Error, F extends PromisedFn<T>> {
+  response: T | null;
   state: MobxRequestorState;
   fetchId: string;
-  params: any;
-  error: any;
+  params: Parameters<F>;
+  error?: K | null;
 }
 
-export class MobxRequestor<T> {
-  fetchId: string = '';
+export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K extends Error = Error> {
+  _fetchId: string = '';
 
-  requestPromise?: Promise<T>;
+  _requestPromise: Promise<T> | null = null;
 
-  transformError?: TransformErrorFn;
+  _transformError?: TransformErrorFn<K>;
 
-  onResponse?: OnResponseCallback;
+  _call: PromisedFn<T>;
 
-  call;
+  _state: MobxRequestorState = 'initial';
 
-  lastSentPayload: any;
+  _storedResponse: T | null = null;
 
-  onAbort?: CallbackFn;
+  _defaultResponse: T | Partial<T> | null;
 
-  state: MobxRequestorState = 'initial';
+  _rawError: K | null;
 
-  storedResponse?: T;
+  _requestCount = 0;
 
-  defaultResponse?: any;
+  _autoClear?: boolean = true;
 
-  _rawError: any;
+  _downloadProgress: number = 0;
 
-  requestCount = 0;
-
-  autoClear?: boolean = true;
-
-  downloadProgress = 0;
-
-  uploadProgress = 0;
+  _uploadProgress: number = 0;
 
   resetUploadProgress() {
-    this.uploadProgress = 0;
+    this._uploadProgress = 0;
   }
 
   resetDownloadProgress() {
-    this.downloadProgress = 0;
+    this._downloadProgress = 0;
   }
 
   resetProgressReport() {
@@ -79,31 +65,31 @@ export class MobxRequestor<T> {
   }
 
   get uploadComplete() {
-    return this.uploadProgress === 100;
+    return this._uploadProgress === 100;
   }
 
   get downloadComplete() {
-    return this.downloadProgress === 100;
+    return this._downloadProgress === 100;
   }
 
   reportUploadProgress = (args: UploadDownloadProgressArgs) => {
-    this.uploadProgress = args.percentage;
+    this._uploadProgress = args.percentage;
   };
 
   reportDownloadProgress = (args: UploadDownloadProgressArgs) => {
-    this.downloadProgress = args.percentage;
+    this._downloadProgress = args.percentage;
   };
 
-  get loading() {
-    return this.state === 'fetching';
+  get loading(): boolean {
+    return this._state === 'fetching';
   }
 
-  get success() {
-    return this.state === 'success';
+  get success(): boolean {
+    return this._state === 'success';
   }
 
-  get initialOrLoading() {
-    const { state, loading } = this;
+  get initialOrLoading(): boolean {
+    const { _state: state, loading } = this;
     return state === 'initial' || loading;
   }
 
@@ -112,7 +98,7 @@ export class MobxRequestor<T> {
   };
 
   clearResponse = () => {
-    this._setResult(undefined, 'initial', null);
+    this._setResult(null, 'initial', null);
   };
 
   clearErrorAndResponse = () => {
@@ -120,47 +106,32 @@ export class MobxRequestor<T> {
     this.clearResponse();
   };
 
-  async setResult(args: any) {
+  async setResult(args: SetResultParams<T, K, F>) {
     const { fetchId } = args;
     // ignore request that is not current
-    if (this.fetchId !== fetchId) return;
+    if (this._fetchId !== fetchId) return;
 
-    const executeOnResponse = action(async (providedArgs: any) => {
-      try {
-        await this.onResponse?.(providedArgs);
-      } catch (execError) {
-        console.error('executeResponse error: ', execError);
-      }
-    });
-
-    const providedArgs = { ...args, prevResponse: this.storedResponse };
-
-    if (this.onResponse) {
-      await executeOnResponse(providedArgs);
-    }
-
-    const { response, state, error } = providedArgs;
+    const { response, state, error } = args;
 
     this._setResult(response, state, error);
   }
 
-  _setResult = (response: T | undefined, state: MobxRequestorState, error: any) => {
-    this.storedResponse = response;
-    this.state = state;
-    this.requestPromise = undefined;
+  _setResult = (response: T | null, state: MobxRequestorState, error: K | null | undefined) => {
+    this._storedResponse = response;
+    this._state = state;
+    this._requestPromise = null;
 
     if (error) {
       this._rawError = error;
     }
   };
 
-  get error() {
-    const receivedError = this._rawError || {};
-    const { sender } = receivedError;
+  get error(): string {
+    const receivedError = this._rawError;
 
-    const error = this.transformError
-      ? this.transformError(receivedError) ?? 'UKNONW_ERROR'
-      : sender?.response?.token || sender?.statusText || receivedError?.type || receivedError?.message;
+    if (!receivedError) return '';
+
+    const error = (this._transformError && this._transformError(receivedError)) || (receivedError as any)?.type || receivedError?.message || 'UNKNONW_ERROR';
 
     return error;
   }
@@ -170,67 +141,41 @@ export class MobxRequestor<T> {
   }
 
   get response() {
-    return this.storedResponse || this.defaultResponse;
-  }
-
-  /**
-   * stores the last payload sent to this request. It stores all the arguments passed to execCall
-   */
-  get lastPayloadSent() {
-    return this.lastSentPayload;
-  }
-
-  abort() {
-    const { requestPromise, onAbort } = this;
-    // TODO: should be abortable promise
-    if ((requestPromise as any)?.abort) {
-      (requestPromise as any).abort();
-
-      onAbort?.();
-    }
+    return this._storedResponse || this._defaultResponse;
   }
 
   clearError() {
     this._rawError = null;
   }
 
-  async _handleError(responseError: any, fetchId: string, params: any) {
-    const { sender } = responseError;
-    if (sender?.status === 0) {
-      // ignore abort errors
-      this._setResult(undefined, 'error', undefined);
-      return;
-    }
-
-    console.error('error requesting data for', this.fetchId, params, responseError);
+  async _handleError(error: K, fetchId: string, params: Parameters<F>) {
+    console.error('error requesting data for', this._fetchId, params, error);
 
     await this.setResult({
       response: null,
       state: 'error',
       fetchId,
       params,
-      error: responseError,
+      error,
     });
   }
 
-  async execCall(...args: any[]) {
-    this.requestCount++;
+  async execCall(...args: Parameters<F>) {
+    this._requestCount++;
 
-    this.fetchId = `${this.requestCount}`;
+    this._fetchId = `${this._requestCount}`;
 
-    const { fetchId } = this;
+    const { _fetchId: fetchId } = this;
 
     try {
-      this.state = 'fetching';
+      this._state = 'fetching';
       this._rawError = null;
 
-      if (this.autoClear) {
-        this.storedResponse = {} as T;
+      if (this._autoClear) {
+        this._storedResponse = {} as T;
       }
 
-      this.abort();
-
-      const { call: theActualPromisedFunction } = this;
+      const { _call: theActualPromisedFunction } = this;
 
       if (!theActualPromisedFunction) {
         throw new Error('"call" method not set');
@@ -249,9 +194,7 @@ export class MobxRequestor<T> {
       (p as any).onUploadProgress = this.reportUploadProgress;
       (p as any).onDownloadProgress = this.reportDownloadProgress;
 
-      this.requestPromise = p;
-
-      this.lastSentPayload = args;
+      this._requestPromise = p;
 
       const response = await p;
 
@@ -266,15 +209,15 @@ export class MobxRequestor<T> {
     }
   }
 
-  constructor(opts: MobxRequestorArgs<T>) {
+  constructor(opts: MobxRequestorArgs<T, F, K>) {
     makeObservable(this, {
-      state: observable,
-      storedResponse: observable.shallow,
-      _rawError: observable.shallow,
+      _state: observable,
+      _storedResponse: observable.ref,
+      _rawError: observable.ref,
       rawError: computed,
       error: computed,
-      downloadProgress: observable,
-      uploadProgress: observable,
+      _downloadProgress: observable,
+      _uploadProgress: observable,
       resetUploadProgress: action,
       resetDownloadProgress: action,
       resetProgressReport: action,
@@ -291,21 +234,23 @@ export class MobxRequestor<T> {
       setResult: action,
       _setResult: action,
       response: computed,
-      lastPayloadSent: computed,
       clearError: action,
       _handleError: action,
       execCall: action,
     });
 
-    const { call, onResponse, autoClear, defaultResponse, transformError } = opts;
+    const { call, autoClear = true, defaultResponse, transformError } = opts;
+
     if (!call) {
-      throw new Error('"call" parameter should be defined');
+      throw new Error('"call" parameter not provided');
     }
 
-    this.call = call;
-    this.transformError = transformError;
-    this.onResponse = onResponse;
-    this.autoClear = autoClear;
-    this.defaultResponse = defaultResponse;
+    this._call = call;
+
+    this._transformError = transformError;
+    this._autoClear = autoClear;
+    this._defaultResponse = defaultResponse || null;
+    this._storedResponse = null;
+    this._rawError = null;
   }
 }
