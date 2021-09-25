@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.0.0
+- **Bug Fixes**
+  - add some initial tests - [12bf91e]( https://github.com/royriojas/mobx-requestor/commit/12bf91e ), [royriojas](https://github.com/royriojas), 25/09/2021 02:47:42
+
+    
 ## v3.0.1
 - **Bug Fixes**
   - issue preventing setting the error on the requestor instance - [b6ace9b]( https://github.com/royriojas/mobx-requestor/commit/b6ace9b ), [royriojas](https://github.com/royriojas), 24/09/2021 15:45:47
