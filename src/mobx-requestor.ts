@@ -205,7 +205,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
         params: args,
       });
     } catch (error) {
-      await this._handleError(error, fetchId, args);
+      await this._handleError(error as K, fetchId, args);
     }
   }
 
