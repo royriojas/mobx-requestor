@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.0.1
+- **Bug Fixes**
+  - global export fix - [1479ec3]( https://github.com/royriojas/mobx-requestor/commit/1479ec3 ), [royriojas](https://github.com/royriojas), 26/09/2021 06:24:35
+
+    
 ## v4.0.0
 - **Bug Fixes**
   - add some initial tests - [12bf91e]( https://github.com/royriojas/mobx-requestor/commit/12bf91e ), [royriojas](https://github.com/royriojas), 25/09/2021 02:47:42
