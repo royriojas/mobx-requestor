@@ -1,5 +1,14 @@
 
 # mobx-requestor - Changelog
+## v4.1.0
+- **Bug Fixes**
+  - make sure _defaultResponse is honored and added tests - [6b2d188]( https://github.com/royriojas/mobx-requestor/commit/6b2d188 ), [royriojas](https://github.com/royriojas), 18/05/2023 00:28:38
+
+    
+- **Other changes**
+  - update npm packages - [9f8a65c]( https://github.com/royriojas/mobx-requestor/commit/9f8a65c ), [royriojas](https://github.com/royriojas), 17/05/2023 22:29:56
+
+    
 ## v4.0.1
 - **Bug Fixes**
   - global export fix - [1479ec3]( https://github.com/royriojas/mobx-requestor/commit/1479ec3 ), [royriojas](https://github.com/royriojas), 26/09/2021 06:24:35
