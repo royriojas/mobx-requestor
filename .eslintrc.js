@@ -27,6 +27,7 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/no-unresolved': 'off',
     'no-shadow': 'off',
+    'max-classes-per-file': 'off',
     'no-undef': 'off',
     'no-use-before-define': 'off',
     'no-unused-expressions': 'off',

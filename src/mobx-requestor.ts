@@ -172,7 +172,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
       this._rawError = null;
 
       if (this._autoClear) {
-        this._storedResponse = {} as T;
+        this._storedResponse = this._defaultResponse as T | null;
       }
 
       const { _call: theActualPromisedFunction } = this;
@@ -254,3 +254,14 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
     this._rawError = null;
   }
 }
+
+export type ServiceFn = (...args: any[]) => Promise<any>;
+export interface CreateRequestorOpts<T extends ServiceFn, ResponseError extends Error = Error>
+  extends MobxRequestorArgs<Awaited<ReturnType<T>>, T, ResponseError> {}
+
+export const createRequestor = <T extends ServiceFn, ResponseError extends Error = Error>(args: CreateRequestorOpts<T, ResponseError>) => {
+  type Ret = Awaited<ReturnType<T>>;
+  return new MobxRequestor<Ret, T, ResponseError>(args);
+};
+
+export class SimpleRequestor<T extends ServiceFn, ResponseError extends Error = Error> extends MobxRequestor<Awaited<ReturnType<T>>, T, ResponseError> {}

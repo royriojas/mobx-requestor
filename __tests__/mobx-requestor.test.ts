@@ -1,4 +1,4 @@
-import { MobxRequestor } from '../src/mobx-requestor';
+import { MobxRequestor, createRequestor } from '../src/mobx-requestor';
 
 interface Deferred<T> extends Promise<T> {
   resolve: (...args: any) => void;
@@ -21,6 +21,15 @@ const createDeferred = <T>() => {
 };
 
 describe('mobx-requestor', () => {
+  beforeEach(() => {
+    // override console.error to mute it
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    // reset console.error
+    jest.spyOn(console, 'error').mockRestore();
+  });
+
   test('creating a mobx requestor instance should throw if call is not provided', () => {
     expect(() => {
       // @ts-expect-error
@@ -116,5 +125,88 @@ describe('mobx-requestor', () => {
     expect(rq.error).toEqual('Missing data');
 
     expect(rq.rawError?.message).toEqual('Missing data');
+  });
+
+  test('requestor by default return null as response', async () => {
+    const rq = new MobxRequestor({
+      call: async () => {},
+    });
+
+    expect(rq.response).toEqual(null);
+  });
+
+  test('requestor by default will return the value pass as default response', async () => {
+    const rq = new MobxRequestor({
+      call: async () => '',
+      defaultResponse: 'default response',
+    });
+
+    expect(rq.response).toEqual('default response');
+  });
+
+  test('requestor will change the value to whatever value is returned from the call function', async () => {
+    const rq = new MobxRequestor({
+      call: async () => ({ data: 'some data' }),
+    });
+
+    expect(rq.response).toEqual(null);
+
+    await rq.execCall();
+
+    expect(rq.response).toEqual({ data: 'some data' });
+  });
+
+  test('calling clear will return null as the default value', async () => {
+    const rq = new MobxRequestor({
+      call: async () => ({ data: 'some data' }),
+    });
+
+    expect(rq.response).toEqual(null);
+
+    await rq.execCall();
+
+    expect(rq.response).toEqual({ data: 'some data' });
+
+    rq.clearResponse();
+
+    expect(rq.response).toEqual(null);
+  });
+
+  test('calling clear will return whatever value was set as default value', async () => {
+    const rq = new MobxRequestor({
+      call: async () => ({ data: 'some data' }),
+      defaultResponse: { data: 'default data' },
+    });
+
+    expect(rq.response).toEqual({ data: 'default data' });
+
+    await rq.execCall();
+
+    expect(rq.response).toEqual({ data: 'some data' });
+
+    rq.clearResponse();
+
+    expect(rq.response).toEqual({ data: 'default data' });
+  });
+
+  describe('createRequestor', () => {
+    it('createRequestor create a mobx requestor from a call function inferring all types needed', async () => {
+      const call = async (id: string) => ({ data: [id] });
+      const rq = createRequestor({ call });
+
+      // typescript should warn about the missing id parameter
+      // @ts-expect-error
+      await rq.execCall();
+
+      await rq.execCall('someId');
+
+      // typescript should warn about the fact that someProp does not exist on response
+      // @ts-expect-error
+      const testResponse = rq.response?.someProp;
+
+      expect(testResponse).toEqual(undefined);
+
+      expect(rq.response?.data?.[0]).toEqual('someId');
+    });
   });
 });
