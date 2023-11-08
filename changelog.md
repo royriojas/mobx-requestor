@@ -1,7 +1,10 @@
 
 # mobx-requestor - Changelog
-## v4.1.0
+## v4.1.1
 - **Bug Fixes**
+  - remove default console.error on request errors - [2a2560f]( https://github.com/royriojas/mobx-requestor/commit/2a2560f ), [royriojas](https://github.com/royriojas), 08/11/2023 03:08:42
+
+    
   - make sure _defaultResponse is honored and added tests - [6b2d188]( https://github.com/royriojas/mobx-requestor/commit/6b2d188 ), [royriojas](https://github.com/royriojas), 18/05/2023 00:28:38
 
     
