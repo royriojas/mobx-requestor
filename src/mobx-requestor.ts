@@ -148,8 +148,10 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
     this._rawError = null;
   }
 
+  onError?: (args: { error: K; fetchId: string; params: Parameters<F> }) => void = undefined;
+
   async _handleError(error: K, fetchId: string, params: Parameters<F>) {
-    console.error('error requesting data for', this._fetchId, params, error);
+    this.onError?.({ error, fetchId, params });
 
     await this.setResult({
       response: null,
