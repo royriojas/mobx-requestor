@@ -10,7 +10,7 @@ export interface TransformErrorFn<K> {
 export interface MobxRequestorArgs<T, F extends PromisedFn<T>, K extends Error> {
   call: F;
   autoClear?: boolean;
-  defaultResponse?: Partial<T>;
+  defaultResponse?: T;
   transformError?: TransformErrorFn<K>;
 }
 
@@ -39,7 +39,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
 
   _storedResponse: T | null = null;
 
-  _defaultResponse: T | Partial<T> | null;
+  _defaultResponse: T | null;
 
   _rawError: K | null;
 
