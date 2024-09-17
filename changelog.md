@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.2.0
+- **Features**
+  - improved types to remove Partial - [8a2f2ab]( https://github.com/royriojas/mobx-requestor/commit/8a2f2ab ), [royriojas](https://github.com/royriojas), 16/09/2024 22:00:13
+
+    
 ## v4.1.1
 - **Bug Fixes**
   - remove default console.error on request errors - [2a2560f]( https://github.com/royriojas/mobx-requestor/commit/2a2560f ), [royriojas](https://github.com/royriojas), 08/11/2023 03:08:42
