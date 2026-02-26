@@ -34,7 +34,7 @@ describe('mobx-requestor', () => {
     expect(() => {
       // @ts-expect-error
       const rq = new MobxRequestor({}); // eslint-disable-line @typescript-eslint/no-unused-vars
-    }).toThrowErrorMatchingInlineSnapshot(`"\\"call\\" parameter not provided"`);
+    }).toThrowErrorMatchingInlineSnapshot(`"method to execute is expected as \`call\` parameter"`);
   });
 
   test('creating a mobx requestor should not throw if the call parameter is provided', async () => {

@@ -3,6 +3,17 @@
   "version": "4.2.0",
   "license": "MIT",
   "main": "lib/mobx-requestor.js",
+  "types": "lib/mobx-requestor.d.ts",
+  "exports": {
+    ".": {
+      "types": {
+        "import": "./lib/mobx-requestor.d.mts",
+        "require": "./lib/mobx-requestor.d.ts"
+      },
+      "import": "./lib/mobx-requestor.mjs",
+      "require": "./lib/mobx-requestor.js"
+    }
+  },
   "author": {
     "name": "royriojas",
     "url": "http://royriojas.com"
@@ -16,6 +27,8 @@
   },
   "scripts": {
     "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
+    "lint": "npm run check",
+    "verify": "npm run type-check",
     "autofix": "npm run check -- --fix",
     "changelog": "changelogx -c changelogx.config.js -f markdown -o ./changelog.md",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
@@ -29,21 +42,15 @@
     "prepublishOnly": "npm run build",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "rm -rf lib/ && npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\"",
-    "test": "jest"
+    "build": "rm -rf lib/ && npm run build:cjs && npm run build:esm && npm run build:rename",
+    "build:cjs": "tsc",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:rename": "mv lib/esm/mobx-requestor.js lib/mobx-requestor.mjs && mv lib/esm/mobx-requestor.d.ts lib/mobx-requestor.d.mts && rm -rf lib/esm",
+    "test": "bun test"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-typescript": "^7.12.7",
-    "@types/jest": "^27.5.2",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
-    "babel-eslint": "^10.1.0",
     "changelogx": "^4.0.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -54,7 +61,6 @@
     "eslint-plugin-mocha": "^8.0.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "jest": "^27.2.1",
     "mobx": "^6.3.3",
     "prettier": "^2.2.1",
     "typescript": "^4.9.5"

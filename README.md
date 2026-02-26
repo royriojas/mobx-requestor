@@ -1,61 +1,124 @@
 # mobx-requestor
 
-# What is this?
+[![NPM Version](https://img.shields.io/npm/v/mobx-requestor.svg)](https://www.npmjs.com/package/mobx-requestor)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/royriojas/mobx-requestor/actions/workflows/ci.yml/badge.svg)](https://github.com/royriojas/mobx-requestor/actions/workflows/ci.yml)
 
-This is an abstraction over a resource request for mobx. It aims to make it simpler to deal with the data fetching and posting using any abstraction to perform the request/posts
-# How do I use it?
+**mobx-requestor** is a lightweight, type-safe abstraction for managing resource requests in MobX. It simplifies data fetching and state management, providing a consistent way to handle loading, success, and error states without the boilerplate.
 
-```ts
-// simpler example
-const rq = new MobxRequestor({
-  call: (...args) => {
-    // service.someMethod is just a function that returns a 
-    // promise to resolve to the data being fetched or to 
-    // the result of a POST/PUT/PATCH operation
-    return service.someMethod(...args);
+## Why use it?
+
+Managing request states (loading, errors, response data) across many components can get messy. `mobx-requestor` wraps your asynchronous calls and provides observable properties that reflect the current state of the request, making it easy to react to changes in your UI.
+
+- ✅ **Type-safe**: Built with TypeScript from the ground up.
+- ✅ **Zero Boilerplate**: Automatically manages `loading`, `success`, and `error` states.
+- ✅ **Flexible**: Works with any promise-returning function (Axios, Fetch, etc.).
+- ✅ **Modern**: Supports both ESM and CommonJS.
+
+## Installation
+
+```bash
+bun add mobx-requestor
+# or
+npm install mobx-requestor
+```
+
+## Usage Examples
+
+### 1. Basic Example (The Quick Start)
+
+```typescript
+import { MobxRequestor } from 'mobx-requestor'
+
+const getUser = new MobxRequestor({
+  call: (id: string) => fetch(`/api/users/${id}`).then(res => res.json())
+})
+
+// Execute the call
+await getUser.execCall('123')
+
+// Reactive state
+console.log(getUser.loading) // true while fetching
+console.log(getUser.response) // the user data
+console.log(getUser.error) // any caught error as string
+```
+
+### 2. Advanced TypeScript Usage (Strongly Typed)
+
+Using `mobx-requestor` with specific interfaces ensures you always know what data you're getting back.
+
+```typescript
+import { MobxRequestor } from 'mobx-requestor'
+
+interface User {
+  id: string
+  name: string
+  email: string
+}
+
+interface UserFilters {
+  role?: string
+  active?: boolean
+}
+
+class UserStore {
+  // TypeScript will infer these types correctly from the 'call' function
+  usersRequest = new MobxRequestor({
+    call: async (filters: UserFilters): Promise<User[]> => {
+      const response = await api.get('/users', { params: filters })
+      return response.data
+    },
+    defaultResponse: [], // Initial value for .response before any call
+    transformError: err =>
+      err.response?.data?.message || 'Failed to fetch users'
+  })
+
+  async loadUsers() {
+    await this.usersRequest.execCall({ active: true })
   }
-});
+}
 
-// although this function return a promise
-// it is guaranteed to always resolve 
-// the data or error can be inspected on the 
-// `error` and `response` properties respectively
-await rq.execCall({ someArg: 1 });
+// In your MobX-aware UI:
+const store = new UserStore()
+if (store.usersRequest.loading) return <Spinner />
+if (store.usersRequest.error)
+  return <ErrorMessage text={store.usersRequest.error} />
 
-// query the state of the request
-rq.loading // true if the request is in progress
-
-// if an error ocurred the error can be found here (as text)
-rq.error
-
-// if the request finalized without throwing then this will be true
-rq.success
-
-// whatever was resolved from the service.someMethod function 
-// will be available in this property
-req.response 
-
-```
-## Building the repo
-
-```sh
-npm run build
+return (
+  <ul>
+    {store.usersRequest.response.map(user => (
+      <li key={user.id}>{user.name}</li>
+    ))}
+  </ul>
+)
 ```
 
-## Type-checking the repo
+## API Reference
 
-```sh
-npm run type-check
-```
+- `loading`: (Observable) `true` if a request is currently in progress.
+- `success`: (Observable) `true` if the last request completed successfully.
+- `error`: (Observable) The error message if the last request failed.
+- `rawError`: (Observable) The raw error object if the last request failed.
+- `response`: (Observable) The data returned from the last successful request (defaults to `null` or `defaultResponse`).
+- `execCall(...args)`: Executes the underlying `call` function with the provided arguments.
+- `clearResponse()`: Resets the response to the default value.
+- `clearError()`: Clears the current error.
 
-And to run in `--watch` mode:
+## Development
 
-```sh
-npm run type-check:watch
+This project uses [Bun](https://bun.sh) for development and testing.
+
+```bash
+# Build (generates CJS and ESM)
+bun run build
+
+# Run tests
+bun test
+
+# Linting
+bun run lint
 ```
 
 ## License
-MIT
 
-## tests
-TODO
+MIT

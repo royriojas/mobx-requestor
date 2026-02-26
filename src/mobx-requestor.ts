@@ -244,7 +244,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
     const { call, autoClear = true, defaultResponse, transformError } = opts;
 
     if (!call) {
-      throw new Error('"call" parameter not provided');
+      throw new Error('method to execute is expected as `call` parameter');
     }
 
     this._call = call;
