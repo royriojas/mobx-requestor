@@ -12,7 +12,7 @@
         "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./dist/mobx-form.d.ts",
+        "types": "./dist/mobx-requestor.d.ts",
         "default": "./dist/index.cjs"
       }
     }
