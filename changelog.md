@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.3.0
+- **Features**
+  - improved build and tests with bun - [f83456b]( https://github.com/royriojas/mobx-requestor/commit/f83456b ), [royriojas](https://github.com/royriojas), 26/02/2026 03:58:35
+
+    
 ## v4.2.0
 - **Features**
   - improved types to remove Partial - [8a2f2ab]( https://github.com/royriojas/mobx-requestor/commit/8a2f2ab ), [royriojas](https://github.com/royriojas), 16/09/2024 22:00:13
@@ -10,6 +15,8 @@
   - remove default console.error on request errors - [2a2560f]( https://github.com/royriojas/mobx-requestor/commit/2a2560f ), [royriojas](https://github.com/royriojas), 08/11/2023 03:08:42
 
     
+## v4.1.0
+- **Bug Fixes**
   - make sure _defaultResponse is honored and added tests - [6b2d188]( https://github.com/royriojas/mobx-requestor/commit/6b2d188 ), [royriojas](https://github.com/royriojas), 18/05/2023 00:28:38
 
     
