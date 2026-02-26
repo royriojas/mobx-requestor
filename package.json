@@ -2,16 +2,19 @@
   "name": "mobx-requestor",
   "version": "4.3.0",
   "license": "MIT",
-  "main": "lib/mobx-requestor.js",
-  "types": "lib/mobx-requestor.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/mobx-requestor.d.ts",
   "exports": {
     ".": {
-      "types": {
-        "import": "./lib/mobx-requestor.d.mts",
-        "require": "./lib/mobx-requestor.d.ts"
+      "import": {
+        "types": "./dist/mobx-requestor.d.mts",
+        "default": "./dist/index.mjs"
       },
-      "import": "./lib/mobx-requestor.mjs",
-      "require": "./lib/mobx-requestor.js"
+      "require": {
+        "types": "./dist/mobx-form.d.ts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "author": {
@@ -19,7 +22,7 @@
     "url": "http://royriojas.com"
   },
   "files": [
-    "lib/"
+    "dist/"
   ],
   "repository": {
     "type": "git",
@@ -42,15 +45,16 @@
     "prepublishOnly": "npm run build",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "rm -rf lib/ && npm run build:cjs && npm run build:esm && npm run build:rename",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:rename": "mv lib/esm/mobx-requestor.js lib/mobx-requestor.mjs && mv lib/esm/mobx-requestor.d.ts lib/mobx-requestor.d.mts && rm -rf lib/esm",
+    "build": "rm -rf ./dist && bun bun.build.ts && npm run dts && npm run bundle-types",
+    "dts": "tsc -p tsconfig.build.json --emitDeclarationOnly --declaration --outDir dist",
+    "bundle-types": "bash bundle-types.sh",
     "test": "bun test"
   },
   "devDependencies": {
+    "dts-bundle": "0.7.3",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
+    "@types/bun": "^1.2.20",
     "changelogx": "^4.0.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -63,7 +67,7 @@
     "eslint-plugin-react": "^7.22.0",
     "mobx": "^6.3.3",
     "prettier": "^2.2.1",
-    "typescript": "^4.9.5"
+    "typescript": "5.9.3"
   },
   "peerDependencies": {
     "mobx": "^6.3.3"
