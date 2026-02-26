@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.4.0
+- **Features**
+  - improved typing generation - [e8b68bd]( https://github.com/royriojas/mobx-requestor/commit/e8b68bd ), [royriojas](https://github.com/royriojas), 26/02/2026 13:55:43
+
+    
 ## v4.3.0
 - **Features**
   - improved build and tests with bun - [f83456b]( https://github.com/royriojas/mobx-requestor/commit/f83456b ), [royriojas](https://github.com/royriojas), 26/02/2026 03:58:35
