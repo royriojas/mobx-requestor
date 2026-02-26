@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v4.5.0
+- **Bug Fixes**
+  - fix wrong name for d.ts file - [510d004]( https://github.com/royriojas/mobx-requestor/commit/510d004 ), [royriojas](https://github.com/royriojas), 26/02/2026 15:24:39
+
+    
 ## v4.4.0
 - **Features**
   - improved typing generation - [e8b68bd]( https://github.com/royriojas/mobx-requestor/commit/e8b68bd ), [royriojas](https://github.com/royriojas), 26/02/2026 13:55:43
