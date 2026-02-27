@@ -1,5 +1,10 @@
 
 # mobx-requestor - Changelog
+## v5.0.0
+- **Features**
+  - change call to callFn for better typing warnings. Breaking change - [24f0386]( https://github.com/royriojas/mobx-requestor/commit/24f0386 ), [royriojas](https://github.com/royriojas), 26/02/2026 18:33:35
+
+    
 ## v4.5.0
 - **Bug Fixes**
   - fix wrong name for d.ts file - [510d004]( https://github.com/royriojas/mobx-requestor/commit/510d004 ), [royriojas](https://github.com/royriojas), 26/02/2026 15:24:39
