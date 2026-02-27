@@ -1,4 +1,4 @@
-import { MobxRequestor, createRequestor } from '../src/mobx-requestor';
+import { MobxRequestor, createRequestor } from '../src/';
 
 interface Deferred<T> extends Promise<T> {
   resolve: (...args: any) => void;
@@ -43,7 +43,7 @@ describe('mobx-requestor', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const rq = new MobxRequestor<{ data: string[] }, typeof call>({
-        call,
+        callFn: call,
       });
     }).not.toThrowError();
   });
@@ -51,7 +51,7 @@ describe('mobx-requestor', () => {
   test('call parameter typings should propagate to the execCall handler', async () => {
     const call = async (id: string) => ({ data: [id] });
     const rq = new MobxRequestor<{ data: string[] }, typeof call>({
-      call,
+      callFn: call,
     });
 
     await rq.execCall('someId');
@@ -73,7 +73,7 @@ describe('mobx-requestor', () => {
     }
 
     const rq = new MobxRequestor<{ data: string[] }, typeof call, CustomError>({
-      call,
+      callFn: call,
     });
 
     await rq.execCall('someId');
@@ -85,7 +85,7 @@ describe('mobx-requestor', () => {
     const dfd = createDeferred();
 
     const rq = new MobxRequestor({
-      call: async () => dfd,
+      callFn: async () => dfd,
     });
 
     expect(rq.loading).toEqual(false);
@@ -107,7 +107,7 @@ describe('mobx-requestor', () => {
     const dfd = createDeferred();
 
     const rq = new MobxRequestor({
-      call: async () => dfd,
+      callFn: async () => dfd,
     });
 
     expect(rq.loading).toEqual(false);
@@ -129,7 +129,7 @@ describe('mobx-requestor', () => {
 
   test('requestor by default return null as response', async () => {
     const rq = new MobxRequestor({
-      call: async () => {},
+      callFn: async () => {},
     });
 
     expect(rq.response).toEqual(null);
@@ -137,7 +137,7 @@ describe('mobx-requestor', () => {
 
   test('requestor by default will return the value pass as default response', async () => {
     const rq = new MobxRequestor({
-      call: async () => '',
+      callFn: async () => '',
       defaultResponse: 'default response',
     });
 
@@ -146,7 +146,7 @@ describe('mobx-requestor', () => {
 
   test('requestor will change the value to whatever value is returned from the call function', async () => {
     const rq = new MobxRequestor({
-      call: async () => ({ data: 'some data' }),
+      callFn: async () => ({ data: 'some data' }),
     });
 
     expect(rq.response).toEqual(null);
@@ -158,7 +158,7 @@ describe('mobx-requestor', () => {
 
   test('calling clear will return null as the default value', async () => {
     const rq = new MobxRequestor({
-      call: async () => ({ data: 'some data' }),
+      callFn: async () => ({ data: 'some data' }),
     });
 
     expect(rq.response).toEqual(null);
@@ -174,7 +174,7 @@ describe('mobx-requestor', () => {
 
   test('calling clear will return whatever value was set as default value', async () => {
     const rq = new MobxRequestor({
-      call: async () => ({ data: 'some data' }),
+      callFn: async () => ({ data: 'some data' }),
       defaultResponse: { data: 'default data' },
     });
 
@@ -192,7 +192,7 @@ describe('mobx-requestor', () => {
   describe('createRequestor', () => {
     it('createRequestor create a mobx requestor from a call function inferring all types needed', async () => {
       const call = async (id: string) => ({ data: [id] });
-      const rq = createRequestor({ call });
+      const rq = createRequestor({ callFn: call });
 
       // typescript should warn about the missing id parameter
       // @ts-expect-error

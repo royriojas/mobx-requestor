@@ -31,7 +31,7 @@ npm install mobx-requestor
 import { MobxRequestor } from 'mobx-requestor'
 
 const getUser = new MobxRequestor({
-  call: (id: string) => fetch(`/api/users/${id}`).then(res => res.json())
+  callFn: (id: string) => fetch(`/api/users/${id}`).then(res => res.json())
 })
 
 // Execute the call
@@ -64,7 +64,7 @@ interface UserFilters {
 class UserStore {
   // TypeScript will infer these types correctly from the 'call' function
   usersRequest = new MobxRequestor({
-    call: async (filters: UserFilters): Promise<User[]> => {
+    callFn: async (filters: UserFilters): Promise<User[]> => {
       const response = await api.get('/users', { params: filters })
       return response.data
     },
@@ -97,12 +97,35 @@ return (
 
 - `loading`: (Observable) `true` if a request is currently in progress.
 - `success`: (Observable) `true` if the last request completed successfully.
+- `initialOrLoading`: (Observable) `true` if the request is in its initial state or currently fetching.
 - `error`: (Observable) The error message if the last request failed.
 - `rawError`: (Observable) The raw error object if the last request failed.
 - `response`: (Observable) The data returned from the last successful request (defaults to `null` or `defaultResponse`).
-- `execCall(...args)`: Executes the underlying `call` function with the provided arguments.
+- `uploadComplete`: (Observable) `true` if the upload progress reached 100%.
+- `downloadComplete`: (Observable) `true` if the download progress reached 100%.
+- `execCall(...args)`: Executes the underlying `callFn` function with the provided arguments.
 - `clearResponse()`: Resets the response to the default value.
 - `clearError()`: Clears the current error.
+- `clearErrorAndResponse()`: Clears both the current error and resets the response.
+- `resetProgressReport()`: Resets both upload and download progress to 0.
+
+## Helpers
+
+### `createRequestor` and `SimpleRequestor`
+
+For simpler setups where you want to infer types directly from a function:
+
+```typescript
+import { createRequestor } from 'mobx-requestor'
+
+const getUser = async (id: string) => {
+  /* ... */
+}
+
+const userRequestor = createRequestor({
+  callFn: getUser
+})
+```
 
 ## Development
 

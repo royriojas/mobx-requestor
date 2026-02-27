@@ -1,30 +1,28 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 
 export type MobxRequestorState = 'initial' | 'fetching' | 'success' | 'error';
-export interface PromisedFn<T> {
-  (...args: any[]): Promise<T>;
-}
-export interface TransformErrorFn<K> {
-  (error: K): string;
-}
-export interface MobxRequestorArgs<T, F extends PromisedFn<T>, K extends Error> {
-  call: F;
+export type PromisedFn<T> = (...args: any[]) => Promise<T>;
+
+export type TransformErrorFn<K> = (error: K) => string;
+
+export type MobxRequestorArgs<T, F extends PromisedFn<T>, K extends Error> = {
+  callFn: F;
   autoClear?: boolean;
   defaultResponse?: T;
   transformError?: TransformErrorFn<K>;
-}
+};
 
-export interface UploadDownloadProgressArgs {
+export type UploadDownloadProgressArgs = {
   percentage: number;
-}
+};
 
-export interface SetResultParams<T, K extends Error, F extends PromisedFn<T>> {
+export type SetResultParams<T, K extends Error, F extends PromisedFn<T>> = {
   response: T | null;
   state: MobxRequestorState;
   fetchId: string;
   params: Parameters<F>;
   error?: K | null;
-}
+};
 
 export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K extends Error = Error> {
   _fetchId: string = '';
@@ -33,7 +31,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
 
   _transformError?: TransformErrorFn<K>;
 
-  _call: PromisedFn<T>;
+  _callFn: PromisedFn<T>;
 
   _state: MobxRequestorState = 'initial';
 
@@ -177,7 +175,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
         this._storedResponse = this._defaultResponse as T | null;
       }
 
-      const { _call: theActualPromisedFunction } = this;
+      const { _callFn: theActualPromisedFunction } = this;
 
       if (!theActualPromisedFunction) {
         throw new Error('"call" method not set');
@@ -241,13 +239,13 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
       execCall: action,
     });
 
-    const { call, autoClear = true, defaultResponse, transformError } = opts;
+    const { callFn: call, autoClear = true, defaultResponse, transformError } = opts;
 
     if (!call) {
       throw new Error('method to execute is expected as `call` parameter');
     }
 
-    this._call = call;
+    this._callFn = call;
 
     this._transformError = transformError;
     this._autoClear = autoClear;
@@ -258,8 +256,7 @@ export class MobxRequestor<T = any, F extends PromisedFn<T> = PromisedFn<any>, K
 }
 
 export type ServiceFn = (...args: any[]) => Promise<any>;
-export interface CreateRequestorOpts<T extends ServiceFn, ResponseError extends Error = Error>
-  extends MobxRequestorArgs<Awaited<ReturnType<T>>, T, ResponseError> {}
+export type CreateRequestorOpts<T extends ServiceFn, ResponseError extends Error = Error> = MobxRequestorArgs<Awaited<ReturnType<T>>, T, ResponseError>;
 
 export const createRequestor = <T extends ServiceFn, ResponseError extends Error = Error>(args: CreateRequestorOpts<T, ResponseError>) => {
   type Ret = Awaited<ReturnType<T>>;
