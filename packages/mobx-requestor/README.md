@@ -2,7 +2,9 @@
 
 [![NPM Version](https://img.shields.io/npm/v/mobx-requestor.svg)](https://www.npmjs.com/package/mobx-requestor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/royriojas/mobx-requestor/actions/workflows/ci.yml/badge.svg)](https://github.com/royriojas/mobx-requestor/actions/workflows/ci.yml)
+[![Build Status](https://github.com/royriojas/mobx-requestor/workflows/CI/badge.svg)](https://github.com/royriojas/mobx-requestor/actions)
+
+> **Important:** The complete API documentation, tutorials, and advanced usage guides can be found at the [official Docusaurus site](https://royriojas.github.io/mobx-requestor).
 
 **mobx-requestor** is a lightweight, type-safe abstraction for managing resource requests in MobX. It simplifies data fetching and state management, providing a consistent way to handle loading, success, and error states without the boilerplate.
 
@@ -62,7 +64,7 @@ interface UserFilters {
 }
 
 class UserStore {
-  // TypeScript will infer these types correctly from the 'call' function
+  // TypeScript will infer these types correctly from the 'callFn' function
   usersRequest = new MobxRequestor({
     callFn: async (filters: UserFilters): Promise<User[]> => {
       const response = await api.get('/users', { params: filters })
