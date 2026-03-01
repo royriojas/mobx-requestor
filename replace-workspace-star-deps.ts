@@ -5,8 +5,8 @@ import { Glob } from "bun";
 
 const main = async () => {
   // get all package.json files in the monorepo
-  const glob = new Glob("**/*/package.json");
-  const scannedFiles = await Array.fromAsync(glob.scan({ cwd: './packages' }))
+  const glob = new Glob("./packages/**/*/package.json");
+  const scannedFiles = await Array.fromAsync(glob.scan())
   
   const pkgEntries = await Promise.all(scannedFiles.map(async (file) => {
     const content = JSON.parse(await Bun.file(file).text());
