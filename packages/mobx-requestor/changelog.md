@@ -1,5 +1,26 @@
 
 # mobx-requestor - Changelog
+## HEAD
+- **Other changes**
+  - fix publish job - [0b39349]( https://github.com/royriojas/mobx-requestor/commit/0b39349 ), [royriojas](https://github.com/royriojas), 28/02/2026 19:51:17
+
+    
+  - fix publish job - [f0c853f]( https://github.com/royriojas/mobx-requestor/commit/f0c853f ), [royriojas](https://github.com/royriojas), 28/02/2026 19:50:35
+
+    
+  - remove the problematic modules - [06d8bad]( https://github.com/royriojas/mobx-requestor/commit/06d8bad ), [royriojas](https://github.com/royriojas), 28/02/2026 19:45:35
+
+    
+  - Add docusaurus documentation - [3351311]( https://github.com/royriojas/mobx-requestor/commit/3351311 ), [royriojas](https://github.com/royriojas), 28/02/2026 19:41:40
+
+    
+  - Add docusaurus documentation - [31ba5ff]( https://github.com/royriojas/mobx-requestor/commit/31ba5ff ), [royriojas](https://github.com/royriojas), 28/02/2026 19:38:27
+
+    
+- **Bug Fixes**
+  - Move to monorepo - [d1a7d02]( https://github.com/royriojas/mobx-requestor/commit/d1a7d02 ), [royriojas](https://github.com/royriojas), 28/02/2026 19:18:22
+
+    
 ## v5.0.0
 - **Features**
   - change call to callFn for better typing warnings. Breaking change - [24f0386]( https://github.com/royriojas/mobx-requestor/commit/24f0386 ), [royriojas](https://github.com/royriojas), 26/02/2026 18:33:35
