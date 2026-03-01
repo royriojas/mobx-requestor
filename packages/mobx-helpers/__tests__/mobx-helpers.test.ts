@@ -142,7 +142,7 @@ describe('mobx-helpers', () => {
 
       // callback should have been called synchronously with the instance
       expect(callback).toHaveBeenCalledTimes(1);
-      expect(callback.mock.calls[0]![0]).toBe(store);
+      expect(callback.mock.calls[0]![0]).toEqual({ name: 'initial' });
     });
 
     test('should invoke callback immediately and then on subsequent changes', async () => {
@@ -188,7 +188,7 @@ describe('mobx-helpers', () => {
 
       // initial callback with the full instance
       expect(callback).toHaveBeenCalledTimes(1);
-      expect(callback.mock.calls[0]![0]).toBe(store);
+      expect(callback.mock.calls[0]![0]).toEqual({ name: 'initial', active: false });
 
       runInAction(() => {
         store.name = 'new';
