@@ -55,14 +55,13 @@ off2();
 
 ### `trackChanges(instance, props, callback)`
 
-Like `onChange`, but fires the callback **immediately** with the current instance before listening for changes:
+Like `onChange`, but fires the callback **immediately** with the current values of the tracked properties before listening for changes:
 
 ```ts
 import { trackChanges } from 'mobx-helpers';
 
 const off = trackChanges(store, ['name', 'age'], (values) => {
-  // First call: `values` is the store instance itself
-  // Subsequent calls: `values` is { name, age }
+  // Both first call and subsequent calls: values === { name, age }
   console.log(values);
 });
 ```
