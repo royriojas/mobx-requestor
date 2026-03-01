@@ -1,75 +1,18 @@
 {
-  "name": "mobx-requestor",
-  "version": "5.0.0",
-  "license": "MIT",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/mobx-requestor.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/mobx-requestor.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/mobx-requestor.d.ts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
-  "author": {
-    "name": "royriojas",
-    "url": "http://royriojas.com"
-  },
-  "files": [
-    "dist/"
+  "name": "mobx-requestor-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/royriojas/mobx-requestor.git"
-  },
   "scripts": {
-    "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
-    "lint": "npm run check",
-    "verify": "npm run type-check",
-    "autofix": "npm run check -- --fix",
-    "changelog": "changelogx -c changelogx.config.js -f markdown -o ./changelog.md",
-    "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
-    "install-hooks": "changelogx install-hook",
-    "pre-v": "npm run check",
-    "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
-    "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
-    "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
-    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v",
-    "bump-prerelease": "npm run pre-v && npm version prerelease -m 'BLD: Release v%s' && npm run post-v",
-    "prepublishOnly": "npm run build",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build": "rm -rf ./dist && bun bun.build.ts && npm run dts && npm run bundle-types",
-    "dts": "tsc -p tsconfig.build.json --emitDeclarationOnly --declaration --outDir dist",
-    "bundle-types": "bash bundle-types.sh",
-    "test": "bun test"
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "check:types": "turbo check:types",
+    "verify": "turbo lint check:types"
   },
   "devDependencies": {
-    "dts-bundle": "0.7.3",
-    "@typescript-eslint/eslint-plugin": "^4.14.0",
-    "@typescript-eslint/parser": "^4.14.0",
-    "@types/bun": "^1.2.20",
-    "changelogx": "^4.0.0",
-    "eslint": "^7.18.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-formatter-friendly": "^7.0.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-mocha": "^8.0.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "mobx": "^6.3.3",
-    "prettier": "^2.2.1",
-    "typescript": "5.9.3"
+    "turbo": "^2.5.0"
   },
-  "peerDependencies": {
-    "mobx": "^6.3.3"
-  }
+  "packageManager": "bun@1.3.8"
 }
