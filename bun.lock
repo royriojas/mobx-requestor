@@ -6,6 +6,7 @@
       "name": "mobx-requestor",
       "devDependencies": {
         "@changesets/cli": "^2.29.4",
+        "@types/bun": "1.3.9",
         "turbo": "^2.5.0",
       },
     },
@@ -28,9 +29,9 @@
         "typescript": "~5.6.2",
       },
     },
-    "packages/bun-mocker": {
+    "packages/bun-mock-dough": {
       "name": "bun-mock-dough",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "devDependencies": {
         "@types/bun": "^1.2.20",
         "@typescript-eslint/eslint-plugin": "^4.14.0",
@@ -50,7 +51,7 @@
     },
     "packages/i18n-typed": {
       "name": "i18n-typed",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "devDependencies": {
         "@types/bun": "^1.2.20",
         "@typescript-eslint/eslint-plugin": "^4.14.0",
@@ -73,7 +74,7 @@
     },
     "packages/mobx-helpers": {
       "name": "mobx-helpers",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "devDependencies": {
         "@types/bun": "^1.2.20",
         "@typescript-eslint/eslint-plugin": "^4.14.0",
@@ -99,7 +100,7 @@
     },
     "packages/mobx-requestor": {
       "name": "mobx-requestor",
-      "version": "5.2.2",
+      "version": "5.2.3",
       "devDependencies": {
         "@types/bun": "^1.2.20",
         "@typescript-eslint/eslint-plugin": "^4.14.0",
@@ -1113,7 +1114,7 @@
 
     "buffer-from": ["buffer-from@1.1.2", "", {}, "sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ=="],
 
-    "bun-mock-dough": ["bun-mock-dough@workspace:packages/bun-mocker"],
+    "bun-mock-dough": ["bun-mock-dough@workspace:packages/bun-mock-dough"],
 
     "bun-types": ["bun-types@1.3.9", "", { "dependencies": { "@types/node": "*" } }, "sha512-+UBWWOakIP4Tswh0Bt0QD0alpTY8cb5hvgiYeWCMet9YukHbzuruIEeXC2D7nMJPB12kbh8C7XJykSexEqGKJg=="],
 
