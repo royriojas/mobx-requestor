@@ -1,6 +1,6 @@
 {
-  "name": "mobx-requestor",
-  "version": "5.2.0",
+  "name": "mobx-helpers",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -21,7 +21,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/royriojas/mobx-requestor.git"
+    "url": "git+https://github.com/royriojas/mobx-requestor.git",
+    "directory": "packages/mobx-helpers"
   },
   "scripts": {
     "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
@@ -32,7 +33,7 @@
     "do-changelog": "bun run changelog && git add ./changelog.md ./package.json && git commit -m \"BLD: Release v$(node -p 'require(\"./package.json\").version')\" --no-verify",
     "install-hooks": "changelogx install-hook",
     "pre-v": "bun run verify",
-    "post-v": "bun run do-changelog && git tag v$(node -p 'require(\"./package.json\").version') && git push --no-verify && git push --tags --no-verify",
+    "post-v": "bun run do-changelog && git tag mobx-helpers-v$(node -p 'require(\"./package.json\").version') && git push --no-verify && git push --tags --no-verify",
     "bump-major": "bun run pre-v && npm version major --no-workspaces-update --no-git-tag-version && bun run post-v",
     "bump-minor": "bun run pre-v && npm version minor --no-workspaces-update --no-git-tag-version && bun run post-v",
     "bump-patch": "bun run pre-v && npm version patch --no-workspaces-update --no-git-tag-version && bun run post-v",
