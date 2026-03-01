@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.1
+
+### Patch Changes
+
+- First release of i18n-typed
+
 ## 1.1.0
 
 ### Minor Changes

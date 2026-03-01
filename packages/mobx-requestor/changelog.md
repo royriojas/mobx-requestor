@@ -1,5 +1,11 @@
 ## 5.2.1
 
+## 5.2.3
+
+### Patch Changes
+
+- First release of i18n-typed
+
 ## 5.2.2
 
 ### Patch Changes
