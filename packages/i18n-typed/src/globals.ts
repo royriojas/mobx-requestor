@@ -1,1 +1,1 @@
-export const { console } = global;
+export const { console } = globalThis;
