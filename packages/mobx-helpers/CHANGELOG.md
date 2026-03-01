@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.0
+
+### Minor Changes
+
+- Fix behavior of trackChange that was reading the entire instance instead of only the given values
+
 ## 1.0.7
 
 ### Patch Changes
