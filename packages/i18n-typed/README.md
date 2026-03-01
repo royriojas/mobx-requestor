@@ -99,6 +99,22 @@ Creates a type-safe interpolation function from a template string.
 
 **Returns:** `(params: InferredParams<T>) => string`
 
+### `createProxyWithFallback<T>(target: T, fallback: T)`
+
+Creates a Proxy that gracefully falls back to another object if a property is missing in the target. This is useful for providing default translations or handling missing keys.
+
+```ts
+import { createProxyWithFallback } from 'i18n-typed';
+
+const en = { hello: 'Hello' };
+const es = { hello: 'Hola', bye: 'Adiós' };
+
+const i18n = createProxyWithFallback(en, es);
+
+console.log(i18n.hello); // "Hello" (from en)
+console.log(i18n.bye);   // "Adiós" (from es fallback)
+```
+
 ### `InferredParams<S>`
 
 A utility type that extracts the parameter types from a template string. You can use this independently for type-level operations:
@@ -108,6 +124,24 @@ import type { InferredParams } from 'i18n-typed';
 
 type Params = InferredParams<'Hello, {name}! You have {count} items.'>;
 // => { name: string | number; count: string | number }
+```
+
+### Combining Proxies and Interpolation
+
+By combining `createProxyWithFallback` and `toInferredTypedFn`, you can build a complete, type-safe i18n solution with zero runtime dependencies:
+
+```ts
+const en = { 
+  items: toInferredTypedFn('{count, plural, zero {No items} one {1 item} other {# items}}') 
+};
+const es = { 
+  items: toInferredTypedFn('{count, plural, zero {Sin items} one {1 item} other {# items}}') 
+};
+
+// Language switching with a fallback
+const t = createProxyWithFallback(en, es);
+
+console.log(t.items({ count: 5 })); // "5 items"
 ```
 
 ## License
