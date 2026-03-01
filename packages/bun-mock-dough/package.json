@@ -19,10 +19,18 @@
   "files": [
     "dist/"
   ],
+  "keywords": [
+    "bun",
+    "mocking",
+    "testing",
+    "module-mocking",
+    "overrides",
+    "typescript"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/royriojas/mobx-requestor.git",
-    "directory": "packages/i18n-typed"
+    "directory": "packages/bun-mock-dough"
   },
   "scripts": {
     "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",

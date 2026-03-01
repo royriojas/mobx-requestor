@@ -19,6 +19,14 @@
   "files": [
     "dist/"
   ],
+  "keywords": [
+    "mobx",
+    "utilities",
+    "reactive",
+    "state-management",
+    "typescript",
+    "observers"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/royriojas/mobx-requestor.git",

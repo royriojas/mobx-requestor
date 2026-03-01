@@ -19,6 +19,15 @@
   "files": [
     "dist/"
   ],
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "typescript",
+    "type-safe",
+    "interpolation",
+    "plurals",
+    "icu"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/royriojas/mobx-requestor.git",

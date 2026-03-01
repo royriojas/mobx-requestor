@@ -19,6 +19,15 @@
   "files": [
     "dist/"
   ],
+  "keywords": [
+    "mobx",
+    "requesting",
+    "data-fetching",
+    "reactive",
+    "loading-states",
+    "async",
+    "typescript"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/royriojas/mobx-requestor.git"
