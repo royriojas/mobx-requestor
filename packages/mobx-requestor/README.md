@@ -2,7 +2,6 @@
 
 [![NPM Version](https://img.shields.io/npm/v/mobx-requestor.svg)](https://www.npmjs.com/package/mobx-requestor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/royriojas/mobx-requestor/workflows/CI/badge.svg)](https://github.com/royriojas/mobx-requestor/actions)
 
 > **Important:** The complete API documentation, tutorials, and advanced usage guides can be found at the [official Docusaurus site](https://royriojas.github.io/mobx-requestor).
 

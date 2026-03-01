@@ -1,6 +1,7 @@
 # mobx-requestor-monorepo
 
-This repository is a monorepo for the `mobx-requestor` project, an extensible data fetching logic wrapper that observes changes via MobX.
+[![Build Status](https://github.com/royriojas/mobx-requestor/workflows/CI/badge.svg)](https://github.com/royriojas/mobx-requestor/actions)
+
 
 ## Packages
 

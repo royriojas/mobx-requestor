@@ -1,5 +1,9 @@
 # mobx-helpers
 
+[![NPM Version](https://img.shields.io/npm/v/mobx-helpers.svg)](https://www.npmjs.com/package/mobx-helpers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 Lightweight MobX utilities for observing property changes and composing disposers.
 
 ## Installation
