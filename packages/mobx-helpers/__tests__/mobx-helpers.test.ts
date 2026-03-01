@@ -1,6 +1,6 @@
 import { makeAutoObservable, configure, runInAction } from 'mobx';
 import { describe, test, jest, expect } from 'bun:test';
-import { onChange, trackChanges } from '../src';
+import { onChange, trackChanges } from '../src/change-helpers';
 
 // Ensure mobx does not enforce actions for simpler test setup
 configure({ enforceActions: 'never' });
