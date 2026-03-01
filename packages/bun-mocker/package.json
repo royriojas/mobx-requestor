@@ -1,0 +1,54 @@
+{
+  "name": "bun-mocker",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "author": {
+    "name": "royriojas",
+    "url": "http://royriojas.com"
+  },
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royriojas/mobx-requestor.git",
+    "directory": "packages/i18n-typed"
+  },
+  "scripts": {
+    "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
+    "lint": "npm run check",
+    "verify": "npm run check:types",
+    "autofix": "npm run check -- --fix",
+    "prepublishOnly": "bun run build",
+    "test": "bun test",
+    "build": "vite build",
+    "check:types": "tsc --noEmit",
+    "check:types:watch": "npm run check:types -- --watch"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "@types/bun": "^1.2.20",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-formatter-friendly": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
+    "typescript": "5.9.3",
+    "vite": "5.2.10",
+    "vite-plugin-dts": "3.9.0"
+  }
+}

@@ -6,6 +6,8 @@
 ## Packages
 
 - [`mobx-requestor`](./packages/mobx-requestor) - Core fetching and data handling library.
+- [`mobx-helpers`](./packages/mobx-helpers) - Lightweight MobX utilities for observing property changes.
+- [`i18n-typed`](./packages/i18n-typed) - Type-safe i18n string interpolation.
 
 ## Getting Started
 
