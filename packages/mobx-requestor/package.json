@@ -46,7 +46,9 @@
     "test": "bun test",
     "build": "rm -rf ./dist && bun bun.build.ts && bun run dts && bun run bundle-types",
     "dts": "tsc -p tsconfig.build.json --emitDeclarationOnly --declaration --outDir dist",
-    "bundle-types": "bash bundle-types.sh"
+    "bundle-types": "bash bundle-types.sh",
+    "check:types": "tsc --noEmit",
+    "check:types:watch": "npm run check:types -- --watch"
   },
   "devDependencies": {
     "dts-bundle": "0.7.3",
