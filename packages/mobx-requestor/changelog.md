@@ -1,5 +1,11 @@
 ## 5.2.1
 
+## 5.2.2
+
+### Patch Changes
+
+- Refactor folder structure
+
 ### Patch Changes
 
 - First release of modules from changeset
