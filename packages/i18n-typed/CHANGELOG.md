@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.0
+
+### Minor Changes
+
+- Add support for more complex plural cases
+
 ## 0.1.2
 
 ### Patch Changes
