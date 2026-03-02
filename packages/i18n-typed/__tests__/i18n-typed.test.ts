@@ -60,10 +60,32 @@ describe('i18n-typed', () => {
     });
 
     test('should handle plural block in the middle of text with simple placeholders', () => {
-      const template = 'Hello {name}, you have {count, plural, zero {no messages} one {1 message} other {# messages}} waiting';
-      const fn = toInferredTypedFn(template);
-      expect((fn as any)({ name: 'Alice', count: 0 })).toBe('Hello Alice, you have no messages waiting');
-      expect((fn as any)({ name: 'Bob', count: 5 })).toBe('Hello Bob, you have 5 messages waiting');
+      const fn = toInferredTypedFn('Hello {name}, you have {count, plural, zero {no messages} one {1 message} other {# messages}} waiting');
+      expect(fn({ name: 'Alice', count: 0 })).toBe('Hello Alice, you have no messages waiting');
+      expect(fn({ name: 'Bob', count: 5 })).toBe('Hello Bob, you have 5 messages waiting');
+    });
+
+    test('should handle plural block in the end of text with simple placeholders', () => {
+      const fn = toInferredTypedFn(
+        'Hello {name}, you have {count, plural, zero {no messages} one {1 message} other {# messages}} and {friends, plural, zero {no friends} one {1 friend} other {# friends}}',
+      );
+      expect(fn({ name: 'Alice', count: 0, friends: 0 })).toBe('Hello Alice, you have no messages and no friends');
+      expect(fn({ name: 'Bob', count: 5, friends: 1 })).toBe('Hello Bob, you have 5 messages and 1 friend');
+    });
+
+    test('should handle plural blocks with partial cases', () => {
+      const fn = toInferredTypedFn('{count, plural, other {# items}} and {count2, plural, other {# items2}}');
+      expect(fn({ count: 0, count2: 0 })).toBe('0 items and 0 items2');
+      expect(fn({ count: 1, count2: 1 })).toBe('1 items and 1 items2');
+      expect(fn({ count: 2, count2: 2 })).toBe('2 items and 2 items2');
+    });
+
+    test('should handle plural with only one case', () => {
+      // @ts-expect-error other is mandatory
+      const fn = toInferredTypedFn('{count, plural, one {# item}}');
+      expect(fn({ count: 1 })).toBe('1 item');
+      expect(fn({ count: 0 })).toBe('0');
+      expect(fn({ count: 2 })).toBe('2');
     });
   });
 
