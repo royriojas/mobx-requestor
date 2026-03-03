@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/extensions': 'off',
+    'no-param-reassign': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
     'import/no-unresolved': 'off',

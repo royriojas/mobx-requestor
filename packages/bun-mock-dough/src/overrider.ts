@@ -5,7 +5,7 @@ export interface Overrider {
 
 const overridenInstances: Array<Overrider> = [];
 
-export const overrideRestore = () => overridenInstances.forEach((ins) => ins.restore());
+export const overrideRestore = () => overridenInstances.forEach(ins => ins.restore());
 
 export const createOverrider = (obj: Record<string, any>, allowNonExistentProps?: boolean) => {
   const originals: Record<string, any> = {};
@@ -17,9 +17,9 @@ export const createOverrider = (obj: Record<string, any>, allowNonExistentProps?
       const objMethod = obj[prop];
 
       originals[prop] = objMethod;
-      
+
       try {
-        obj[prop] = newPropValue;  
+        obj[prop] = newPropValue;
       } catch (e) {
         console.error(e);
         Object.defineProperty(obj, prop, {
@@ -30,7 +30,7 @@ export const createOverrider = (obj: Record<string, any>, allowNonExistentProps?
     },
     restore() {
       const keys = Object.keys(originals);
-      keys.forEach((key) => {
+      keys.forEach(key => {
         obj[key] = originals[key];
       });
     },
@@ -41,12 +41,8 @@ export const createOverrider = (obj: Record<string, any>, allowNonExistentProps?
   return ins;
 };
 
-export const override = (
-  obj: Record<string, any>,
-  propsToOverride: Record<string, any>,
-  allowNonExistentProps?: boolean,
-) => {
+export const override = (obj: Record<string, any>, propsToOverride: Record<string, any>, allowNonExistentProps?: boolean) => {
   const ov = createOverrider(obj, allowNonExistentProps);
-  Object.keys(propsToOverride).forEach((key) => ov.override(key, propsToOverride[key]));
+  Object.keys(propsToOverride).forEach(key => ov.override(key, propsToOverride[key]));
   return ov;
 };
