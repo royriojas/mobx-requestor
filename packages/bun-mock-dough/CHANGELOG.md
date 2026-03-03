@@ -1,5 +1,11 @@
 # bun-mock-dough
 
+## 0.1.3
+
+### Patch Changes
+
+- FIX: Fix broken ci tests
+
 ## 0.1.2
 
 ### Patch Changes

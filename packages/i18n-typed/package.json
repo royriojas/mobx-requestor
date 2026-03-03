@@ -45,7 +45,7 @@
     "check:types:watch": "npm run check:types -- --watch"
   },
   "devDependencies": {
-    "bun-mock-dough": "0.1.2",
+    "bun-mock-dough": "0.1.3",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "@types/bun": "^1.2.20",
