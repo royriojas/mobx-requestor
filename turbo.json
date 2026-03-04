@@ -9,6 +9,10 @@
       "dependsOn": [],
       "cache": false
     },
+    "autofix": {
+      "dependsOn": [],
+      "cache": false
+    },
     "test": {
       "dependsOn": [],
       "cache": false

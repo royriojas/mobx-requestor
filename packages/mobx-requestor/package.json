@@ -33,7 +33,7 @@
     "url": "git+https://github.com/royriojas/mobx-requestor.git"
   },
   "scripts": {
-    "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts'",
+    "check": "eslint --cache --cache-location node_modules/.cache/ -f friendly 'src/**/*.ts' '__tests__/**/*.ts'",
     "lint": "npm run check",
     "verify": "npm run check:types",
     "autofix": "npm run check -- --fix",

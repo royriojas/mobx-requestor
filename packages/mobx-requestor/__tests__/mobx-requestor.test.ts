@@ -1,4 +1,4 @@
-import { MobxRequestor, createRequestor } from '../src/';
+import { MobxRequestor, createRequestor } from '../src';
 
 interface Deferred<T> extends Promise<T> {
   resolve: (...args: any) => void;

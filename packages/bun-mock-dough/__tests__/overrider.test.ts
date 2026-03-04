@@ -29,9 +29,7 @@ describe('overrider', () => {
 
     test('should throw when overriding a non-existent property', () => {
       const ov = createOverrider(obj);
-      expect(() => ov.override('nonExistent', 'value')).toThrow(
-        'Only properties that exist could be overriden',
-      );
+      expect(() => ov.override('nonExistent', 'value')).toThrow('Only properties that exist could be overriden');
     });
 
     test('should allow overriding non-existent properties when allowNonExistentProps is true', () => {
@@ -100,9 +98,7 @@ describe('overrider', () => {
 
     test('should throw when overriding non-existent props without allowNonExistentProps', () => {
       const obj = { a: 1 };
-      expect(() => override(obj, { a: 2, b: 3 } as any)).toThrow(
-        'Only properties that exist could be overriden',
-      );
+      expect(() => override(obj, { a: 2, b: 3 } as any)).toThrow('Only properties that exist could be overriden');
     });
   });
 

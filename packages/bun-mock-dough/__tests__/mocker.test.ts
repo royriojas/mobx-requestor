@@ -1,14 +1,11 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
 import { describe, test, expect, beforeEach, afterEach, mock } from 'bun:test';
 import { removeFromCache, Mocker } from '../src/mocker';
 
 describe('mocker', () => {
   describe('removeFromCache', () => {
-    const fakeModulePaths = [
-      '/fake/path/to/moduleA.ts',
-      '/fake/path/to/moduleB.ts',
-      '/fake/path/to/nested/moduleC.ts',
-      '/other/path/moduleD.ts',
-    ];
+    const fakeModulePaths = ['/fake/path/to/moduleA.ts', '/fake/path/to/moduleB.ts', '/fake/path/to/nested/moduleC.ts', '/other/path/moduleD.ts'];
 
     beforeEach(() => {
       // Seed fake entries in require.cache
@@ -75,14 +72,14 @@ describe('mocker', () => {
 
     test('should log when modules are removed', () => {
       const logSpy = mock();
-      const originalLog = console.log;
-      console.log = logSpy;
+      const originalLog = console.info;
+      console.info = logSpy;
 
       const removed = removeFromCache('moduleA');
       expect(removed).toHaveLength(1);
       expect(logSpy).toHaveBeenCalledTimes(1);
 
-      console.log = originalLog;
+      console.info = originalLog;
     });
   });
 

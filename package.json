@@ -10,6 +10,7 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "check:types": "turbo check:types",
+    "autofix": "turbo autofix",
     "verify": "turbo lint check:types",
     "changeset": "changeset",
     "version": "changeset version",
