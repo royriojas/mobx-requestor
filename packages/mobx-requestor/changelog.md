@@ -1,3 +1,9 @@
+## 5.2.5
+
+### Patch Changes
+
+- 79ec9cf: BLD: forcing minor release
+
 ## 5.2.4
 
 ### Patch Changes

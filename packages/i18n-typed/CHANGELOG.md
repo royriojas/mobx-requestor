@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.2
+
+### Patch Changes
+
+- 79ec9cf: BLD: forcing minor release
+
 ## 0.2.1
 
 ### Patch Changes

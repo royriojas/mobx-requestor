@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.3
+
+### Patch Changes
+
+- 79ec9cf: BLD: forcing minor release
+
 ## 1.1.2
 
 ### Patch Changes

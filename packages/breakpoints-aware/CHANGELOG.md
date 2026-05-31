@@ -1,5 +1,11 @@
 # @milajs/breakpoints-aware
 
+## 0.1.2
+
+### Patch Changes
+
+- 79ec9cf: BLD: forcing minor release
+
 ## 0.1.1
 
 ### Patch Changes
