@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.6
+
+### Patch Changes
+
+- BLD: Update docs and urls to point to milajs
+
 ## 0.2.5
 
 ### Patch Changes

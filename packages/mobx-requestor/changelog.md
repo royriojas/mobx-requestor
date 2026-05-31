@@ -1,3 +1,9 @@
+## 5.2.9
+
+### Patch Changes
+
+- BLD: Update docs and urls to point to milajs
+
 ## 5.2.8
 
 ### Patch Changes

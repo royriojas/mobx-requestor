@@ -1,5 +1,11 @@
 # @milajs/breakpoints-aware
 
+## 0.1.6
+
+### Patch Changes
+
+- BLD: Update docs and urls to point to milajs
+
 ## 0.1.5
 
 ### Patch Changes

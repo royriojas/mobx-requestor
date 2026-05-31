@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.7
+
+### Patch Changes
+
+- BLD: Update docs and urls to point to milajs
+
 ## 1.1.6
 
 ### Patch Changes

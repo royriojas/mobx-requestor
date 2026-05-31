@@ -1,5 +1,11 @@
 # bun-mock-dough
 
+## 0.1.9
+
+### Patch Changes
+
+- BLD: Update docs and urls to point to milajs
+
 ## 0.1.8
 
 ### Patch Changes
