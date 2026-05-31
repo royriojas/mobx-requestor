@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, jest, afterEach } from 'bun:test';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Mocker } from 'bun-mock-dough';
+import { Mocker } from '@milajs/bun-mock-dough';
 import { createProxyWithFallback } from '../src/create-proxy';
 
 interface Baz {

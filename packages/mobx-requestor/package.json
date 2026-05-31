@@ -1,5 +1,5 @@
 {
-  "name": "mobx-requestor",
+  "name": "@milajs/mobx-requestor",
   "version": "5.2.3",
   "license": "MIT",
   "main": "./dist/index.js",

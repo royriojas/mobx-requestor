@@ -1,5 +1,5 @@
 {
-  "name": "i18n-typed",
+  "name": "@milajs/i18n-typed",
   "version": "0.2.0",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -45,7 +45,7 @@
     "check:types:watch": "npm run check:types -- --watch"
   },
   "devDependencies": {
-    "bun-mock-dough": "workspace:*",
+    "@milajs/bun-mock-dough": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "@types/bun": "^1.2.20",

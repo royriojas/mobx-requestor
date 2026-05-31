@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@mobx-requestor/docs"]
+  "ignore": ["@milajs/docs"]
 }
