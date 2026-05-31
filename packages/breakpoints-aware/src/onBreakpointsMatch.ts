@@ -55,7 +55,7 @@ function buildInstanceCSS(
   minWidths: number[],
 ): string {
   // One @container rule per breakpoint.  Each rule overrides the
-  // previous one via the CSS cascade, so `--ba-matches` is always the
+  // previous one via the CSS cascade, so `--ba-cm-matches` is always the
   // cumulative list up to that point.
   return sorted
     .map((_, i) => {
@@ -66,7 +66,7 @@ function buildInstanceCSS(
 @container ${containerName} (min-width: ${minWidths[i]}px) {
   [data-ba-id="${id}"] {
     --ba-cm-anim: ${animName};
-    --ba-matches: '${matchingNames.join(',')}';
+    --ba-cm-matches: '${matchingNames.join(',')}';
   }
 }`;
     })
@@ -180,7 +180,7 @@ export function onBreakpointsMatch<T extends Breakpoints = Breakpoints>(
       if (!entry.isIntersecting) return;
 
       const raw = getComputedStyle(entry.target)
-        .getPropertyValue('--ba-matches')
+        .getPropertyValue('--ba-cm-matches')
         .replace(/'/g, '')
         .trim();
 

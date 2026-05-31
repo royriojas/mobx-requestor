@@ -6,7 +6,7 @@
  * CSS custom properties set at runtime:
  *
  *   --ba-cm-anim   – the currently-active keyframe name (toggled by @container rules)
- *   --ba-matches – comma-separated list of matching breakpoint names
+ *   --ba-cm-matches – comma-separated list of matching breakpoint names
  */
 
 /* ------------------------------------------------------------------ */

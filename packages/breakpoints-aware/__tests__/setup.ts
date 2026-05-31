@@ -58,7 +58,7 @@ window.IntersectionObserver = globalThis.IntersectionObserver;
 
 // Helper to simulate a breakpoint trigger on the sentry element
 export const triggerBreakpoint = (sentry: HTMLElement, matches: string) => {
-  sentry.style.setProperty('--ba-matches', `'${matches}'`);
+  sentry.style.setProperty('--ba-cm-matches', `'${matches}'`);
 
   const obs = activeObservers.find(o => o.observedElement === sentry);
   if (!obs) {

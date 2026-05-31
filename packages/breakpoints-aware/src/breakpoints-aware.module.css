@@ -5,7 +5,7 @@
  * Per-instance values are set at runtime via CSS custom properties:
  *
  *   --ba-cm-anim    – active keyframe name (toggled by @container rules)
- *   --ba-matches – comma-separated matching breakpoint names
+ *   --ba-cm-matches – comma-separated matching breakpoint names
  *
  * `container-name` is set directly on the element via JS because it
  * must be unique per instance.

@@ -1,7 +1,7 @@
 import { describe, test, expect, afterEach, jest } from 'bun:test';
 import { triggerBreakpoint, clearActiveObservers } from './setup';
 import { onBreakpointsMatch } from '../src/onBreakpointsMatch';
-import { defaultBreakpoints } from '../src/index';
+import { defaultBreakpoints, type MatchesResult } from '../src/index';
 
 describe('breakpoints-aware', () => {
   afterEach(() => {
@@ -151,14 +151,12 @@ describe('breakpoints-aware', () => {
     const cleanup = onBreakpointsMatch(container, {
       breakpoints: myBreakpoints,
       onMatch(result) {
-        // These type assignments will trigger TS compiler errors if type inference fails
-        const allKeys: ('mobile' | 'tablet' | 'desktop')[] = result.all;
-        const currentKey: 'mobile' | 'tablet' | 'desktop' = result.current;
-        const matchesRecord: Record<'mobile' | 'tablet' | 'desktop', boolean> = result.matches;
+        // Verify MatchesResult generic typing works correctly
+        const resultTyped: MatchesResult<typeof myBreakpoints> = result;
 
-        expect(allKeys).toBeDefined();
-        expect(currentKey).toBeDefined();
-        expect(matchesRecord).toBeDefined();
+        expect(resultTyped.all).toBeDefined();
+        expect(resultTyped.current).toBeDefined();
+        expect(resultTyped.matches).toBeDefined();
       },
     });
 
