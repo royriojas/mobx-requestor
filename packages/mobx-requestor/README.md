@@ -3,7 +3,7 @@
 [![NPM Version](https://img.shields.io/npm/v/@milajs/mobx-requestor.svg)](https://www.npmjs.com/package/@milajs/mobx-requestor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Important:** The complete API documentation, tutorials, and advanced usage guides can be found at the [official Docusaurus site](https://royriojas.github.io/mobx-requestor).
+> **Important:** The complete API documentation, tutorials, and advanced usage guides can be found at the [official Docusaurus site](https://royriojas.github.io/milajs).
 
 **@milajs/mobx-requestor** is a lightweight, type-safe abstraction for managing resource requests in MobX. It simplifies data fetching and state management, providing a consistent way to handle loading, success, and error states without the boilerplate.
 

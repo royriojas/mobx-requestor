@@ -1,6 +1,6 @@
 # milajs
 
-[![Build Status](https://github.com/royriojas/mobx-requestor/workflows/CI/badge.svg)](https://github.com/royriojas/mobx-requestor/actions)
+[![Build Status](https://github.com/royriojas/milajs/workflows/CI/badge.svg)](https://github.com/royriojas/milajs/actions)
 
 
 ## Packages
@@ -40,4 +40,4 @@ console.log(userRequestor.response); // the resolved data
 console.log(userRequestor.error);    // error message string, or ''
 ```
 
-> For the full API reference and advanced usage, visit the [documentation site](https://royriojas.github.io/mobx-requestor).
+> For the full API reference and advanced usage, visit the [documentation site](https://royriojas.github.io/milajs).
