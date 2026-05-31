@@ -1,5 +1,11 @@
 # @milajs/breakpoints-aware
 
+## 0.1.8
+
+### Patch Changes
+
+- FIX: remove unused breakpoint-aware.css
+
 ## 0.1.7
 
 ### Patch Changes
