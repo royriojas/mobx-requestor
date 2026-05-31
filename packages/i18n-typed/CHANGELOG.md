@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.3
+
+### Patch Changes
+
+- DOC: Update documentation
+
 ## 0.2.2
 
 ### Patch Changes
