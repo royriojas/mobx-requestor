@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.6
+
+### Patch Changes
+
+- BLD: Release
+
 ## 1.1.5
 
 ### Patch Changes

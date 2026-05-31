@@ -1,3 +1,9 @@
+## 5.2.8
+
+### Patch Changes
+
+- BLD: Release
+
 ## 5.2.7
 
 ### Patch Changes

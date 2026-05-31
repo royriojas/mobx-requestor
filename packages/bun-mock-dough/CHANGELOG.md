@@ -1,5 +1,11 @@
 # bun-mock-dough
 
+## 0.1.8
+
+### Patch Changes
+
+- BLD: Release
+
 ## 0.1.7
 
 ### Patch Changes

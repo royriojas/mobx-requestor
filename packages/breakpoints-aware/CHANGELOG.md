@@ -1,5 +1,11 @@
 # @milajs/breakpoints-aware
 
+## 0.1.5
+
+### Patch Changes
+
+- BLD: Release
+
 ## 0.1.4
 
 ### Patch Changes

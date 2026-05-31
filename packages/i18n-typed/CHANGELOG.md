@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.5
+
+### Patch Changes
+
+- BLD: Release
+
 ## 0.2.4
 
 ### Patch Changes
