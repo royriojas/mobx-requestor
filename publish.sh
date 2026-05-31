@@ -6,7 +6,7 @@ bun run build
 bun changeset version
 
 git add .
-git commit -m "chore: release"
+git commit -m "BLD: release"
 
 bun ./replace-workspace-star-deps.ts
 

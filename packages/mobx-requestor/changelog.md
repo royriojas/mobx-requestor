@@ -1,3 +1,9 @@
+## 5.2.4
+
+### Patch Changes
+
+- 07ee2aa: Feat: first release from milajs org
+
 ## 5.2.1
 
 ## 5.2.3

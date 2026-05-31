@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.2
+
+### Patch Changes
+
+- 07ee2aa: Feat: first release from milajs org
+
 ## 1.1.1
 
 ### Patch Changes

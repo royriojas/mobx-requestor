@@ -1,5 +1,11 @@
 # i18n-typed
 
+## 0.2.1
+
+### Patch Changes
+
+- 07ee2aa: Feat: first release from milajs org
+
 ## 0.2.0
 
 ### Minor Changes
