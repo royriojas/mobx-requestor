@@ -1,3 +1,9 @@
+## 5.2.7
+
+### Patch Changes
+
+- DOC: Update versions
+
 ## 5.2.6
 
 ### Patch Changes

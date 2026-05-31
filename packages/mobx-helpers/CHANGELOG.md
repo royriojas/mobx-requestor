@@ -1,5 +1,11 @@
 # mobx-helpers
 
+## 1.1.5
+
+### Patch Changes
+
+- DOC: Update versions
+
 ## 1.1.4
 
 ### Patch Changes

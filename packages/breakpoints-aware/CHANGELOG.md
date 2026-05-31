@@ -1,5 +1,11 @@
 # @milajs/breakpoints-aware
 
+## 0.1.4
+
+### Patch Changes
+
+- DOC: Update versions
+
 ## 0.1.3
 
 ### Patch Changes
