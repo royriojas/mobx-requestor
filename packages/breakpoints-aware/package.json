@@ -1,6 +1,6 @@
 {
   "name": "@milajs/breakpoints-aware",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Container-query based element breakpoint detection using CSS animations and IntersectionObserver",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

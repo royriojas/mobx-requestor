@@ -1,5 +1,12 @@
 # @milajs/breakpoints-aware
 
+## 0.1.7
+
+### Patch Changes
+
+- e468929: FEAT: update variables
+- Fix variables names and docs
+
 ## 0.1.6
 
 ### Patch Changes
