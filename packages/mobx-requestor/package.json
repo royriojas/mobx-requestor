@@ -7,9 +7,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "author": {
@@ -59,8 +59,8 @@
     "mobx": "^6.3.3",
     "prettier": "^2.2.1",
     "typescript": "5.9.3",
-    "vite": "5.2.10",
-    "vite-plugin-dts": "3.9.0"
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0"
   },
   "peerDependencies": {
     "mobx": "^6.3.3"
