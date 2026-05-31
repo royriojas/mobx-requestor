@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'mobx-requestor',
-  tagline: 'Extensible data fetching logic wrapper based on MobX',
+  title: 'milajs',
+  tagline: 'Lightweight, type-safe, and reactive utilities for web development',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -42,6 +42,24 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/mobx-requestor/create-requestor',
+            from: '/create-requestor',
+          },
+          {
+            to: '/mobx-requestor/api',
+            from: '/mobx-requestor-api',
+          },
+        ],
+      },
+    ],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -49,9 +67,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'mobx-requestor',
+      title: 'milajs',
       logo: {
-        alt: 'mobx-requestor Logo',
+        alt: 'milajs Logo',
         src: 'img/logo.svg',
       },
       items: [

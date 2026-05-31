@@ -1,68 +1,27 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
-# Introduction
+# milajs
 
-**mobx-requestor** is a powerful wrapper around your fetch/axios logic that makes data loading reactively elegant by integrating tightly with [MobX](https://mobx.js.org/).
+Welcome to **milajs**, a collection of highly optimized, lightweight, and type-safe utilities designed to enhance modern web development workflows. 
 
-## Why use mobx-requestor?
+## Packages in the Suite
 
-When fetching data in modern UI frameworks, developers often have to manage repetitive boilerplate for loading states, error handling, and success scenarios.
+The `milajs` monorepo contains the following packages:
 
-With `mobx-requestor`, you wrap your fetching function into a reactive store. MobX will automatically track when the function is executing, when it has resolved, and if any errors occurred—making it effortless to build responsive and resilient UIs.
+### 🔄 [@milajs/mobx-requestor](./mobx-requestor)
+A powerful wrapper around your fetch/axios logic that makes data loading reactively elegant by integrating tightly with [MobX](https://mobx.js.org/). Easily manage loading, success, and error states with zero boilerplate.
 
-## Installation
+### 🛠️ [@milajs/mobx-helpers](./mobx-helpers)
+Lightweight utilities for observing MobX observable property changes and composing disposer functions (such as `onChange`, `trackChanges`, and `combineFns`) for seamless integration in React `useEffect` hooks.
 
-```bash
-npm i mobx-requestor mobx
-```
+### 🌐 [@milajs/i18n-typed](./i18n-typed)
+Small, type-safe internationalization utilities. Employs TypeScript template string inference to ensure your translation parameters are strictly typed and always correct, complete with basic ICU plural rules.
 
-Or using bun:
-```bash
-bun add mobx-requestor mobx
-```
+### 🍞 [@milajs/bun-mock-dough](./bun-mock-dough)
+A utility for mocking modules and overriding properties specifically in a Bun environment, overcoming tricky mock restoration issues in Bun tests.
 
-> Note: `mobx` is a required peer dependency.
-
-## Basic Usage
-
-The primary export from `mobx-requestor` is the `createRequestor` function. It takes an options object containing a `callFn` and returns a reactive `MobxRequestor` instance.
-
-```typescript
-import { createRequestor } from 'mobx-requestor';
-import { observer } from 'mobx-react'; // Or mobx-react-lite
-
-// 1. Define your fetch logic (this can be axios, fetch, etc.)
-const fetchUserById = async (id: string) => {
-  const res = await fetch(`/api/users/${id}`);
-  if (!res.ok) throw new Error('User not found');
-  return res.json();
-};
-
-// 2. Wrap it with `createRequestor`
-const userRequestor = createRequestor({ callFn: fetchUserById });
-
-// 3. Use it in a reactive component
-const UserProfile = observer(({ userId }) => {
-  if (userRequestor.loading) {
-    return <div>Loading user {userId}...</div>;
-  }
-
-  if (userRequestor.error) {
-    return <div>Error loading user: {userRequestor.error}</div>;
-  }
-
-  const user = userRequestor.response;
-
-  if (!user) {
-    return <button onClick={() => userRequestor.execCall(userId)}>Load User</button>;
-  }
-
-  return (
-    <div>
-      <h1>{user.name}</h1>
-    </div>
-  );
-});
-```
+### 📐 [@milajs/breakpoints-aware](./breakpoints-aware)
+Element-level breakpoint detection powered by CSS container queries and `IntersectionObserver`. Fully driven by the browser's own container-query engine with no polling and no `ResizeObserver` needed.

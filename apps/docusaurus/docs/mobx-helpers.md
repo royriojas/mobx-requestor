@@ -1,15 +1,15 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
-# mobx-helpers
+# @milajs/mobx-helpers
 
-`mobx-helpers` is a companion package that provides lightweight utilities for observing MobX observable property changes and composing disposer functions.
+`@milajs/mobx-helpers` is a companion package that provides lightweight utilities for observing MobX observable property changes and composing disposer functions.
 
 ## Installation
 
 ```bash
-npm i mobx-helpers mobx
+npm i @milajs/mobx-helpers mobx
 ```
 
 ## `onChange`
@@ -18,7 +18,7 @@ Reacts to changes on one or more observable properties. Returns a disposer funct
 
 ```ts
 import { makeAutoObservable } from 'mobx';
-import { onChange } from 'mobx-helpers';
+import { onChange } from '@milajs/mobx-helpers';
 
 class UserStore {
   name = '';
@@ -48,7 +48,7 @@ off2();
 Like `onChange`, but fires the callback **immediately** with the current values of the tracked properties before listening for subsequent changes:
 
 ```ts
-import { trackChanges } from 'mobx-helpers';
+import { trackChanges } from '@milajs/mobx-helpers';
 
 const off = trackChanges(store, ['name', 'age'], (values) => {
   // Both first call and subsequent calls: values === { name, age }
@@ -63,7 +63,7 @@ This is useful when you need to run initialization logic with the current state 
 Combines multiple disposer functions into one. This is the key utility for cleanly managing multiple MobX reactions inside a React `useEffect`.
 
 ```ts
-import { combineFns } from 'mobx-helpers';
+import { combineFns } from '@milajs/mobx-helpers';
 
 const off = combineFns(disposer1, disposer2, disposer3);
 
@@ -78,7 +78,7 @@ The most common and powerful pattern: set up several `onChange` reactions inside
 ```tsx
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { onChange, combineFns } from 'mobx-helpers';
+import { onChange, combineFns } from '@milajs/mobx-helpers';
 
 const Dashboard = observer(({ authStore, projectStore, notifStore }) => {
   useEffect(() => {

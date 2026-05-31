@@ -31,7 +31,7 @@ type CreateRequestorOpts<T extends ServiceFn, ResponseError extends Error> = {
 ## Basic Example
 
 ```typescript
-import { createRequestor } from 'mobx-requestor';
+import { createRequestor } from '@milajs/mobx-requestor';
 
 const fetchTodos = async () => {
   const res = await fetch('/api/todos');
@@ -79,7 +79,7 @@ const requestor = createRequestor<typeof fetchData, ApiError>({
 For cases where you prefer class inheritance, `SimpleRequestor` is exported as a convenience alias:
 
 ```typescript
-import { SimpleRequestor } from 'mobx-requestor';
+import { SimpleRequestor } from '@milajs/mobx-requestor';
 
 // Equivalent to: new MobxRequestor<Awaited<ReturnType<typeof myFn>>, typeof myFn, Error>(...)
 class MyRequestor extends SimpleRequestor<typeof myFn> {

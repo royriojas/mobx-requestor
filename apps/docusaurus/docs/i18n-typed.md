@@ -1,16 +1,16 @@
 ---
-title: i18n-typed
-sidebar_position: 5
+title: "@milajs/i18n-typed"
+sidebar_position: 4
 ---
 
-# i18n-typed
+# @milajs/i18n-typed
 
-`i18n-typed` provides small, type-safe utilities for handle translations with TypeScript. It focuses on template string inference to ensure your translation parameters are always correct.
+`@milajs/i18n-typed` provides small, type-safe utilities for handle translations with TypeScript. It focuses on template string inference to ensure your translation parameters are always correct.
 
 ## Installation
 
 ```bash
-bun add i18n-typed
+bun add @milajs/i18n-typed
 ```
 
 ## toInferredTypedFn
@@ -22,7 +22,7 @@ The core utility is `toInferredTypedFn`. It takes a template string and returns 
 Use `{key}` for simple string or number interpolation.
 
 ```typescript
-import { toInferredTypedFn } from 'i18n-typed';
+import { toInferredTypedFn } from '@milajs/i18n-typed';
 
 const welcome = toInferredTypedFn('Welcome, {name}!');
 
@@ -58,7 +58,7 @@ hello(); // "Hello world"
 Creates a Proxy that gracefully falls back to another object if a property is missing in the target. This is useful for providing default translations or handling missing keys.
 
 ```typescript
-import { createProxyWithFallback } from 'i18n-typed';
+import { createProxyWithFallback } from '@milajs/i18n-typed';
 
 const en = { hello: 'Hello' };
 const es = { hello: 'Hola', bye: 'Adiós' };
@@ -76,7 +76,7 @@ By combining `createProxyWithFallback` (for language switching and fallbacks) wi
 :::
 
 ```typescript
-import { createProxyWithFallback, toInferredTypedFn } from 'i18n-typed';
+import { createProxyWithFallback, toInferredTypedFn } from '@milajs/i18n-typed';
 
 const en = { hello: 'Hello', items: toInferredTypedFn('{count, plural, zero {No items} one {1 item} other {# items}}') };
 const es = { hello: 'Hola', items: toInferredTypedFn('{count, plural, zero {No items} one {1 item} other {# items}}') };

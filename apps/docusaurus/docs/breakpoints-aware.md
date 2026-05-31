@@ -1,3 +1,8 @@
+---
+title: "@milajs/breakpoints-aware"
+sidebar_position: 6
+---
+
 # @milajs/breakpoints-aware
 
 Element-level breakpoint detection powered by CSS container queries, CSS animations, and `IntersectionObserver`. **No polling. No `ResizeObserver`.** The browser's own container-query engine drives the detection.
@@ -9,6 +14,17 @@ Element-level breakpoint detection powered by CSS container queries, CSS animati
 3. Each container query toggles between two alternating `@keyframes` animations, ensuring the animation **restarts** on every breakpoint transition.
 4. The animation briefly moves the sentry into the `IntersectionObserver` viewport, which fires the `onMatch` callback.
 5. The callback reads the cumulative `--matches` CSS custom property to know which breakpoints currently match.
+
+## Installation
+
+```bash
+bun add @milajs/breakpoints-aware
+```
+
+Or using npm:
+```bash
+npm i @milajs/breakpoints-aware
+```
 
 ## Usage
 
