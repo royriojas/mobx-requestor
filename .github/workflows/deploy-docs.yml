@@ -34,7 +34,7 @@ jobs:
         run: bun install
 
       - name: Build docs
-        run: bun turbo build --filter=@mobx-requestor/docs
+        run: bun turbo build --filter=@milajs/docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
