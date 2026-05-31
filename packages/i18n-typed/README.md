@@ -1,6 +1,6 @@
-# i18n-typed
+# @milajs/i18n-typed
 
-[![NPM Version](https://img.shields.io/npm/v/i18n-typed.svg)](https://www.npmjs.com/package/i18n-typed)
+[![NPM Version](https://img.shields.io/npm/v/@milajs/i18n-typed.svg)](https://www.npmjs.com/package/@milajs/i18n-typed)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Type-safe i18n string interpolation for TypeScript. Automatically infers parameter types from your translation templates at compile time — no codegen, no runtime overhead.
@@ -8,13 +8,13 @@ Type-safe i18n string interpolation for TypeScript. Automatically infers paramet
 ## Installation
 
 ```bash
-npm i i18n-typed
+npm i @milajs/i18n-typed
 ```
 
 Or using bun:
 
 ```bash
-bun add i18n-typed
+bun add @milajs/i18n-typed
 ```
 
 ## Features
@@ -30,7 +30,7 @@ bun add i18n-typed
 ### Simple Placeholders
 
 ```ts
-import { toInferredTypedFn } from 'i18n-typed';
+import { toInferredTypedFn } from '@milajs/i18n-typed';
 
 const greet = toInferredTypedFn('Hello, {name}! You have {count} new messages.');
 
@@ -72,7 +72,7 @@ summary({ user: 'Bob', count: 1280 });
 A common pattern is to compile all your translation strings at once:
 
 ```ts
-import { toInferredTypedFn } from 'i18n-typed';
+import { toInferredTypedFn } from '@milajs/i18n-typed';
 
 const en = {
   greeting: toInferredTypedFn('Welcome back, {name}!'),
@@ -104,7 +104,7 @@ Creates a type-safe interpolation function from a template string.
 Creates a Proxy that gracefully falls back to another object if a property is missing in the target. This is useful for providing default translations or handling missing keys.
 
 ```ts
-import { createProxyWithFallback } from 'i18n-typed';
+import { createProxyWithFallback } from '@milajs/i18n-typed';
 
 const en = { hello: 'Hello' };
 const es = { hello: 'Hola', bye: 'Adiós' };
@@ -120,7 +120,7 @@ console.log(i18n.bye);   // "Adiós" (from es fallback)
 A utility type that extracts the parameter types from a template string. You can use this independently for type-level operations:
 
 ```ts
-import type { InferredParams } from 'i18n-typed';
+import type { InferredParams } from '@milajs/i18n-typed';
 
 type Params = InferredParams<'Hello, {name}! You have {count} items.'>;
 // => { name: string | number; count: string | number }

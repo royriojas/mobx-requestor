@@ -1,14 +1,14 @@
-# bun-mock-dough
+# @milajs/bun-mock-dough
 
-[![NPM Version](https://img.shields.io/npm/v/bun-mock-dough.svg)](https://www.npmjs.com/package/bun-mock-dough)
+[![NPM Version](https://img.shields.io/npm/v/@milajs/bun-mock-dough.svg)](https://www.npmjs.com/package/@milajs/bun-mock-dough)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`bun-mock-dough` is a utility for mocking modules and overriding properties in a Bun environment. It provides a more flexible way to mock dependencies and clean up after tests, specifically addressing issues where restoring mocks in Bun can be tricky.
+`@milajs/bun-mock-dough` is a utility for mocking modules and overriding properties in a Bun environment. It provides a more flexible way to mock dependencies and clean up after tests, specifically addressing issues where restoring mocks in Bun can be tricky.
 
 ## Installation
 
 ```bash
-bun add bun-mock-dough
+bun add @milajs/bun-mock-dough
 ```
 
 ## Features
@@ -25,7 +25,7 @@ bun add bun-mock-dough
 The `Mocker` class is the primary interface for mocking modules. It uses `bun:test`'s `mock.module` under the hood but provides a way to register and clear multiple mocks at once.
 
 ```typescript
-import { Mocker } from 'bun-mock-dough';
+import { Mocker } from '@milajs/bun-mock-dough';
 
 const mocker = new Mocker();
 
@@ -52,7 +52,7 @@ afterEach(() => {
 Removes one or more modules from `require.cache`. This is useful for re-triggering side effects in modules or ensuring a fresh import.
 
 ```typescript
-import { removeFromCache } from 'bun-mock-dough';
+import { removeFromCache } from '@milajs/bun-mock-dough';
 
 removeFromCache('my-module'); // Removes any module path containing "my-module"
 removeFromCache(/utils/);     // Removes modules matching the regex
@@ -69,7 +69,7 @@ Overriders allow you to temporarily change properties or methods on existing obj
 Creates a single overrider instance for an object.
 
 ```typescript
-import { createOverrider } from 'bun-mock-dough';
+import { createOverrider } from '@milajs/bun-mock-dough';
 
 const config = { api: 'https://api.com' };
 const ov = createOverrider(config);
@@ -88,7 +88,7 @@ console.log(config.api); // "https://api.com"
 A helper to create an overrider and immediately apply multiple overrides.
 
 ```typescript
-import { override } from 'bun-mock-dough';
+import { override } from '@milajs/bun-mock-dough';
 
 const config = { api: 'https://api.com', timeout: 1000 };
 const ov = override(config, {

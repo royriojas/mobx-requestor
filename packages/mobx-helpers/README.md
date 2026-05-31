@@ -1,6 +1,6 @@
-# mobx-helpers
+# @milajs/mobx-helpers
 
-[![NPM Version](https://img.shields.io/npm/v/mobx-helpers.svg)](https://www.npmjs.com/package/mobx-helpers)
+[![NPM Version](https://img.shields.io/npm/v/@milajs/mobx-helpers.svg)](https://www.npmjs.com/package/@milajs/mobx-helpers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -9,13 +9,13 @@ Lightweight MobX utilities for observing property changes and composing disposer
 ## Installation
 
 ```bash
-npm i mobx-helpers mobx
+npm i @milajs/mobx-helpers mobx
 ```
 
 Or using bun:
 
 ```bash
-bun add mobx-helpers mobx
+bun add @milajs/mobx-helpers mobx
 ```
 
 > `mobx` is a required peer dependency.
@@ -28,7 +28,7 @@ Reacts to changes on one or more observable properties. Returns a disposer funct
 
 ```ts
 import { makeAutoObservable } from 'mobx';
-import { onChange } from 'mobx-helpers';
+import { onChange } from '@milajs/mobx-helpers';
 
 class UserStore {
   name = '';
@@ -58,7 +58,7 @@ off2();
 Like `onChange`, but fires the callback **immediately** with the current values of the tracked properties before listening for changes:
 
 ```ts
-import { trackChanges } from 'mobx-helpers';
+import { trackChanges } from '@milajs/mobx-helpers';
 
 const off = trackChanges(store, ['name', 'age'], (values) => {
   // Both first call and subsequent calls: values === { name, age }
@@ -71,7 +71,7 @@ const off = trackChanges(store, ['name', 'age'], (values) => {
 Combines multiple disposer functions into a single disposer. This is especially useful inside a React `useEffect` when you set up several `onChange` reactions and need to tear them all down in one cleanup function.
 
 ```ts
-import { combineFns, onChange } from 'mobx-helpers';
+import { combineFns, onChange } from '@milajs/mobx-helpers';
 
 // Inside a React component
 useEffect(() => {
@@ -99,7 +99,7 @@ A common pattern: observe several MobX stores inside a React component and clean
 ```tsx
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { onChange, combineFns } from 'mobx-helpers';
+import { onChange, combineFns } from '@milajs/mobx-helpers';
 
 const Dashboard = observer(({ authStore, projectStore, notifStore }) => {
   useEffect(() => {

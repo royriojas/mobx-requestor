@@ -1,15 +1,15 @@
-# mobx-requestor
+# @milajs/mobx-requestor
 
-[![NPM Version](https://img.shields.io/npm/v/mobx-requestor.svg)](https://www.npmjs.com/package/mobx-requestor)
+[![NPM Version](https://img.shields.io/npm/v/@milajs/mobx-requestor.svg)](https://www.npmjs.com/package/@milajs/mobx-requestor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > **Important:** The complete API documentation, tutorials, and advanced usage guides can be found at the [official Docusaurus site](https://royriojas.github.io/mobx-requestor).
 
-**mobx-requestor** is a lightweight, type-safe abstraction for managing resource requests in MobX. It simplifies data fetching and state management, providing a consistent way to handle loading, success, and error states without the boilerplate.
+**@milajs/mobx-requestor** is a lightweight, type-safe abstraction for managing resource requests in MobX. It simplifies data fetching and state management, providing a consistent way to handle loading, success, and error states without the boilerplate.
 
 ## Why use it?
 
-Managing request states (loading, errors, response data) across many components can get messy. `mobx-requestor` wraps your asynchronous calls and provides observable properties that reflect the current state of the request, making it easy to react to changes in your UI.
+Managing request states (loading, errors, response data) across many components can get messy. `@milajs/mobx-requestor` wraps your asynchronous calls and provides observable properties that reflect the current state of the request, making it easy to react to changes in your UI.
 
 - ✅ **Type-safe**: Built with TypeScript from the ground up.
 - ✅ **Zero Boilerplate**: Automatically manages `loading`, `success`, and `error` states.
@@ -19,9 +19,9 @@ Managing request states (loading, errors, response data) across many components 
 ## Installation
 
 ```bash
-bun add mobx-requestor
+bun add @milajs/mobx-requestor
 # or
-npm install mobx-requestor
+npm install @milajs/mobx-requestor
 ```
 
 ## Usage Examples
@@ -29,7 +29,7 @@ npm install mobx-requestor
 ### 1. Basic Example (The Quick Start)
 
 ```typescript
-import { MobxRequestor } from 'mobx-requestor'
+import { MobxRequestor } from '@milajs/mobx-requestor'
 
 const getUser = new MobxRequestor({
   callFn: (id: string) => fetch(`/api/users/${id}`).then(res => res.json())
@@ -49,7 +49,7 @@ console.log(getUser.error) // any caught error as string
 Using `mobx-requestor` with specific interfaces ensures you always know what data you're getting back.
 
 ```typescript
-import { MobxRequestor } from 'mobx-requestor'
+import { MobxRequestor } from '@milajs/mobx-requestor'
 
 interface User {
   id: string
@@ -117,7 +117,7 @@ return (
 For simpler setups where you want to infer types directly from a function:
 
 ```typescript
-import { createRequestor } from 'mobx-requestor'
+import { createRequestor } from '@milajs/mobx-requestor'
 
 const getUser = async (id: string) => {
   /* ... */
