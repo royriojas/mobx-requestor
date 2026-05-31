@@ -137,4 +137,32 @@ describe('breakpoints-aware', () => {
 
     cleanup();
   });
+
+  test('should compile with strictly typed generic breakpoint keys', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const myBreakpoints = {
+      mobile: 480,
+      tablet: 768,
+      desktop: 1024,
+    } as const;
+
+    const cleanup = onBreakpointsMatch(container, {
+      breakpoints: myBreakpoints,
+      onMatch(result) {
+        // These type assignments will trigger TS compiler errors if type inference fails
+        const allKeys: ('mobile' | 'tablet' | 'desktop')[] = result.all;
+        const currentKey: 'mobile' | 'tablet' | 'desktop' = result.current;
+        const matchesRecord: Record<'mobile' | 'tablet' | 'desktop', boolean> = result.matches;
+
+        expect(allKeys).toBeDefined();
+        expect(currentKey).toBeDefined();
+        expect(matchesRecord).toBeDefined();
+      },
+    });
+
+    cleanup();
+  });
 });
+
