@@ -1,0 +1,40 @@
+{
+  "name": "@milajs/breakpoints-aware",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Container-query based element breakpoint detection using CSS animations and IntersectionObserver",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "lint": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "keywords": [
+    "breakpoints",
+    "container-queries",
+    "responsive",
+    "resize",
+    "observer"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "happy-dom": "^20.9.0",
+    "typescript": "5.9.3",
+    "vite": "5.2.10",
+    "vite-plugin-css-injected-by-js": "^3.5.0",
+    "vite-plugin-dts": "3.9.0"
+  }
+}

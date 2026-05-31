@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "module": "ES2022",
     "target": "ES2022",
     "moduleResolution": "bundler",
@@ -12,5 +11,7 @@
     "sourceMap": true,
     "baseUrl": ".",
   },
-  "include": ["replace-workspace-star-deps.ts"]
+  "include": [
+    "replace-workspace-star-deps.ts"
+  ]
 }

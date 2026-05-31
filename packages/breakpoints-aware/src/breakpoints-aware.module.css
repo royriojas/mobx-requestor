@@ -1,0 +1,48 @@
+/*
+ * breakpoints-aware — base styles (CSS Module)
+ *
+ * Class names are scoped by the CSS modules transform at build time.
+ * Per-instance values are set at runtime via CSS custom properties:
+ *
+ *   --ba-cm-anim    – active keyframe name (toggled by @container rules)
+ *   --ba-matches – comma-separated matching breakpoint names
+ *
+ * `container-name` is set directly on the element via JS because it
+ * must be unique per instance.
+ */
+
+@keyframes pulseA {
+  50% {
+    top: 0;
+    left: 0;
+  }
+}
+
+@keyframes pulseB {
+  50% {
+    top: 0;
+    left: 0;
+  }
+}
+
+.sentryContainer {
+  container-type: inline-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sentry {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+  animation: var(--ba-cm-anim) 0.5s linear;
+}
